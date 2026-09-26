@@ -1,0 +1,385 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Smoke – Play to Win</title>
+<style>
+@font-face{font-family:P;font-weight:400;src:url(../node_modules/@fontsource/poppins/files/poppins-latin-400-normal.woff2)}
+@font-face{font-family:P;font-weight:600;src:url(../node_modules/@fontsource/poppins/files/poppins-latin-600-normal.woff2)}
+@font-face{font-family:P;font-weight:800;src:url(../node_modules/@fontsource/poppins/files/poppins-latin-800-normal.woff2)}
+@font-face{font-family:P;font-weight:900;src:url(../node_modules/@fontsource/poppins/files/poppins-latin-900-normal.woff2)}
+:root{--bg:#0c0a14;--ink:#fff;--mute:#a9a3c2;--hot:#ff5a36;--pink:#ff3d8b;--violet:#7b5cff;--gold:#ffc53d;--green:#2bd67b;--card:#1a1626}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1920px;height:1080px;overflow:hidden;background:var(--bg);font-family:P,'Noto Color Emoji',sans-serif;color:var(--ink)}
+.abs{position:absolute}
+#stage{position:relative;width:1920px;height:1080px;overflow:hidden}
+.blob{position:absolute;border-radius:50%;filter:blur(90px);opacity:.55}
+.scene{position:absolute;inset:0;opacity:0}
+.grad{background:linear-gradient(90deg,var(--hot),var(--pink),var(--violet));-webkit-background-clip:text;background-clip:text;color:transparent}
+/* phone */
+.phone{position:absolute;width:430px;height:880px;border-radius:64px;background:#05040a;padding:16px;box-shadow:0 40px 120px rgba(0,0,0,.6),0 0 0 3px #2c2640 inset}
+.screen{position:relative;width:100%;height:100%;border-radius:50px;overflow:hidden;background:linear-gradient(180deg,#171325,#0f0c19)}
+.notch{position:absolute;top:14px;left:50%;transform:translateX(-50%);width:120px;height:32px;border-radius:20px;background:#000;z-index:5}
+.sbar{position:absolute;top:18px;left:34px;right:34px;display:flex;justify-content:space-between;font-size:17px;font-weight:600}
+.apphead{position:absolute;top:70px;left:28px;right:28px;display:flex;align-items:center;gap:12px;font-weight:800;font-size:26px}
+.logo-dot{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,var(--hot),var(--pink),var(--violet));display:grid;place-items:center}
+.label{font-size:18px;color:var(--mute);font-weight:600}
+.input{height:70px;border-radius:20px;background:#221c33;border:2px solid #3a3152;display:flex;align-items:center;padding:0 22px;font-size:26px;font-weight:600}
+.btn{height:70px;border-radius:22px;display:grid;place-items:center;font-size:24px;font-weight:800;background:linear-gradient(90deg,var(--hot),var(--pink));}
+.tap{position:absolute;width:70px;height:70px;border-radius:50%;border:5px solid rgba(255,255,255,.9);background:rgba(255,255,255,.25);opacity:0;z-index:20}
+.callout{position:absolute;font-weight:800;font-size:64px;line-height:1.1;letter-spacing:-1px}
+.step{display:inline-block;font-size:24px;font-weight:800;padding:8px 18px;border-radius:40px;background:rgba(255,255,255,.1);color:var(--gold);margin-bottom:22px;letter-spacing:1px}
+.sub{font-size:30px;color:var(--mute);font-weight:400;margin-top:20px;letter-spacing:0}
+.bubble{position:absolute;padding:22px 30px;border-radius:30px;font-size:30px;font-weight:600;white-space:nowrap}
+.row{position:absolute;left:0;right:0;height:78px;border-radius:20px;background:#1d1830;display:flex;align-items:center;padding:0 24px;gap:18px;font-size:26px;font-weight:600}
+.row .rk{width:44px;color:var(--mute);font-weight:800}
+.row .av{width:48px;height:48px;border-radius:50%}
+.row .sc{margin-left:auto;font-weight:800}
+.badge{position:absolute;left:0;display:flex;align-items:center;gap:22px;padding:24px 36px;border-radius:30px;background:rgba(255,255,255,.08);border:2px solid rgba(255,255,255,.14);font-size:44px;font-weight:800;white-space:nowrap}
+.dollar{position:absolute;font-weight:900;color:var(--gold);text-shadow:0 0 20px rgba(255,197,61,.8),0 4px 0 #b37a00}
+#caption{position:absolute;left:50%;bottom:48px;transform:translateX(-50%);max-width:1500px;text-align:center;font-size:36px;font-weight:600;padding:12px 30px;border-radius:18px;background:rgba(0,0,0,.55);opacity:0;z-index:100}
+</style>
+</head>
+<body>
+<div id="stage">
+  <div class="blob" id="b1" style="width:700px;height:700px;background:#ff5a36"></div>
+  <div class="blob" id="b2" style="width:800px;height:800px;background:#7b5cff"></div>
+  <div class="blob" id="b3" style="width:600px;height:600px;background:#ff3d8b"></div>
+
+  <!-- A: intro -->
+  <div class="scene" id="sA">
+    <div class="abs" id="aLogo" style="left:0;right:0;top:330px;text-align:center">
+      <div style="display:inline-flex;align-items:center;gap:28px">
+        <div class="logo-dot" style="width:130px;height:130px;border-radius:38px">
+          <svg width="80" height="80" viewBox="0 0 40 40" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round"><path d="M12 34c-4-6 4-9 0-15s3-10 3-14"/><path d="M21 34c-4-6 4-9 0-15s3-10 3-14"/><path d="M30 34c-4-6 4-9 0-15"/></svg>
+        </div>
+        <div style="font-size:150px;font-weight:900;letter-spacing:-4px">Smoke</div>
+      </div>
+    </div>
+    <div class="abs" style="left:0;right:0;top:560px;text-align:center;font-size:58px;font-weight:800">
+      <span id="aT1">Real conversations.</span> <span id="aT2" class="grad">Real connections.</span>
+    </div>
+    <div class="bubble" id="bb1" style="left:150px;top:150px;background:#2a2340">Niaje! 👋</div>
+    <div class="bubble" id="bb2" style="right:160px;top:190px;background:linear-gradient(90deg,var(--hot),var(--pink))">Let's link up this weekend 🔥</div>
+    <div class="bubble" id="bb3" style="left:220px;top:780px;background:linear-gradient(90deg,var(--violet),var(--pink))">Who's joining the convo? 🎙️</div>
+    <div class="bubble" id="bb4" style="right:230px;top:760px;background:#2a2340">Sawa sawa 😂</div>
+  </div>
+
+  <!-- B: feature title -->
+  <div class="scene" id="sB">
+    <div class="abs" style="left:0;right:0;top:250px;text-align:center;font-size:40px;font-weight:600;color:var(--mute)" id="bKick">NEW ON SMOKE</div>
+    <div class="abs" id="bTitle" style="left:0;right:0;top:330px;text-align:center;font-size:230px;font-weight:900;letter-spacing:-6px;line-height:1"></div>
+    <div class="abs" id="bTro" style="left:0;right:0;top:620px;text-align:center;font-size:150px">🏆</div>
+  </div>
+
+  <!-- C: new user enters handle -->
+  <div class="scene" id="sC">
+    <div class="phone" id="cPhone" style="left:300px;top:100px">
+      <div class="screen">
+        <div class="notch"></div>
+        <div class="sbar"><span>9:41</span><span>●●● 5G</span></div>
+        <div class="apphead"><div class="logo-dot">🔥</div>Smoke</div>
+        <div class="abs" style="top:170px;left:28px;right:28px">
+          <div style="font-size:36px;font-weight:800;line-height:1.15">Welcome, @amani!</div>
+          <div class="label" style="margin-top:10px">Were you invited by a friend? Enter their handle so they get a chance to win.</div>
+          <div class="label" style="margin-top:44px;margin-bottom:12px;color:#fff">Referrer's handle</div>
+          <div class="input" id="cInput"><span style="color:var(--mute)" id="cAt"></span><span id="cTyped"></span><span id="cCaret" style="display:inline-block;width:3px;height:34px;background:var(--pink);margin-left:3px"></span></div>
+          <div id="cCard" style="margin-top:18px;height:92px;border-radius:20px;background:#221c33;display:flex;align-items:center;gap:16px;padding:0 20px;opacity:0">
+            <div class="av" style="width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#ffc53d,#ff5a36)"></div>
+            <div><div style="font-weight:800;font-size:24px">Kevo <span style="color:#4da3ff">✔</span></div><div class="label">@kevo254</div></div>
+          </div>
+        </div>
+        <div class="abs btn" id="cBtn" style="left:28px;right:28px;bottom:70px">Confirm referral</div>
+        <div class="tap" id="cTap" style="left:180px;bottom:70px"></div>
+      </div>
+    </div>
+    <div class="callout" id="cCall" style="left:880px;top:330px">
+      <div class="step">STEP 1</div><br>New user enters<br><span class="grad">the referrer's handle</span>
+      <div class="sub">Sign up and type in who invited you.</div>
+    </div>
+  </div>
+
+  <!-- D: referrer counter -->
+  <div class="scene" id="sD">
+    <div class="callout" id="dCall" style="left:170px;top:330px">
+      <div class="step">STEP 2</div><br>Referrer's chances<br><span class="grad">go up instantly</span>
+      <div class="sub">Referral confirmed. Time to play.</div>
+    </div>
+    <div class="phone" id="dPhone" style="left:1190px;top:100px">
+      <div class="screen">
+        <div class="notch"></div>
+        <div class="sbar"><span>9:42</span><span>●●● 5G</span></div>
+        <div class="apphead"><div class="logo-dot">🔥</div>Play to Win</div>
+        <div id="dToast" class="abs" style="top:20px;left:18px;right:18px;border-radius:24px;background:#2a2340;padding:18px 20px;display:flex;gap:14px;align-items:center;z-index:6;box-shadow:0 10px 30px rgba(0,0,0,.5)">
+          <div style="font-size:36px">🎉</div>
+          <div><div style="font-weight:800;font-size:20px">@amani joined with your handle</div><div class="label" style="font-size:17px">Referral confirmed · +1 chance</div></div>
+        </div>
+        <div class="abs" style="top:150px;left:28px;right:28px;text-align:center">
+          <div class="label" style="font-size:22px">@kevo254 · Your chances</div>
+          <div style="position:relative;height:250px;margin-top:10px">
+            <div id="dRing" class="abs" style="left:50%;top:0;width:250px;height:250px;margin-left:-125px;border-radius:50%;border:10px solid var(--pink);box-shadow:0 0 50px rgba(255,61,139,.5)"></div>
+            <div id="dNumOld" class="abs" style="left:0;right:0;top:40px;font-size:150px;font-weight:900;line-height:1">2</div>
+            <div id="dNumNew" class="abs" style="left:0;right:0;top:40px;font-size:150px;font-weight:900;line-height:1;opacity:0">3</div>
+            <div id="dPlus" class="abs" style="right:40px;top:10px;font-size:46px;font-weight:900;color:var(--green);opacity:0">+1</div>
+          </div>
+          <div id="dConf" style="display:inline-flex;margin-top:26px;gap:10px;align-items:center;padding:12px 24px;border-radius:40px;background:rgba(43,214,123,.15);color:var(--green);font-weight:800;font-size:22px;opacity:0">✔ Referral confirmed</div>
+          <div class="label" style="margin-top:28px">Invited friends: <b id="dFriends" style="color:#fff">1</b></div>
+        </div>
+        <div class="abs btn" id="dBtn" style="left:28px;right:28px;bottom:70px">▶ Start game</div>
+        <div class="tap" id="dTap" style="left:180px;bottom:70px"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- E: game + leaderboard -->
+  <div class="scene" id="sE">
+    <div class="phone" id="ePhone" style="left:240px;top:100px">
+      <div class="screen" style="background:radial-gradient(circle at 50% 30%,#2b1d4a,#0d0a18)">
+        <div class="notch"></div>
+        <div class="sbar"><span>9:42</span><span>●●● 5G</span></div>
+        <div class="abs" style="top:70px;left:28px;right:28px;display:flex;justify-content:space-between;font-weight:800;font-size:24px">
+          <span>Smoke Rings</span><span>Score <span id="eScore" class="grad">0</span></span>
+        </div>
+        <div id="eField" class="abs" style="top:130px;left:0;right:0;bottom:0"></div>
+      </div>
+    </div>
+    <div class="abs" id="eBoard" style="left:880px;top:130px;width:800px">
+      <div class="step">STEP 3</div>
+      <div style="font-size:64px;font-weight:800;letter-spacing:-1px;margin-bottom:30px">Play &amp; <span class="grad">top the leaderboard</span></div>
+      <div id="eRows" style="position:relative;height:560px"></div>
+    </div>
+  </div>
+
+  <!-- F: bottle -> chest -> dollars + badges -->
+  <div class="scene" id="sF">
+    <div class="abs" id="fStep" style="left:0;right:0;top:70px;text-align:center"><span class="step">STEP 4</span><div style="font-size:60px;font-weight:800">Crack open the <span class="grad">treasure chest</span></div></div>
+    <div class="abs" id="fWorld" style="left:0;top:0;width:1920px;height:1080px">
+      <svg class="abs" id="fSea" style="left:0;top:760px" width="1920" height="320"><path id="fWave" fill="#1d3b8f" opacity=".8"/><path id="fWave2" fill="#2753c9" opacity=".7"/></svg>
+      <div class="abs" id="fGlow" style="width:900px;height:900px;border-radius:50%;background:radial-gradient(circle,rgba(255,197,61,.55),rgba(255,197,61,0) 65%);opacity:0"></div>
+      <div class="abs" id="fBottle" style="width:130px;height:300px">
+        <svg width="130" height="300" viewBox="0 0 130 300"><rect x="48" y="0" width="34" height="26" rx="6" fill="#9b6a3a"/><path d="M50 24h30v50c0 10 40 30 40 70v130c0 14-10 24-24 24H34c-14 0-24-10-24-24V144c0-40 40-60 40-70z" fill="rgba(120,220,200,.45)" stroke="rgba(200,255,240,.9)" stroke-width="4"/><rect x="36" y="150" width="58" height="70" rx="8" fill="#f3e1b4" transform="rotate(-8 65 185)"/><text x="65" y="195" text-anchor="middle" font-size="34" font-family="sans-serif" transform="rotate(-8 65 185)">🗝️</text></svg>
+      </div>
+      <div class="abs" id="fChest" style="width:360px;height:300px;opacity:0">
+        <div id="fBase" class="abs" style="left:0;top:120px;width:360px;height:180px;border-radius:0 0 26px 26px;background:linear-gradient(180deg,#8a4b1f,#5c2f10);border:8px solid #ffc53d">
+          <div class="abs" style="left:150px;top:-8px;width:60px;height:70px;border-radius:0 0 14px 14px;background:#ffc53d"></div>
+          <div class="abs" style="left:0;right:0;top:66px;height:14px;background:#ffc53d;opacity:.8"></div>
+        </div>
+        <div id="fLid" class="abs" style="left:0;top:20px;width:360px;height:110px;border-radius:70px 70px 8px 8px;background:linear-gradient(180deg,#a65a24,#7a3e15);border:8px solid #ffc53d;transform-origin:50% 100%"></div>
+      </div>
+      <div id="fDollars" class="abs" style="left:0;top:0;width:1920px;height:1080px"></div>
+    </div>
+    <div class="abs" id="fBadges" style="left:1050px;top:300px;width:800px;height:500px">
+      <div class="badge" id="fb1" style="top:0">💸 <span>100% <span class="grad">free</span> to play</span></div>
+      <div class="badge" id="fb2" style="top:160px">🧠 <span>Skill, <span class="grad">not gambling</span></span></div>
+      <div class="badge" id="fb3" style="top:320px">🤝 <span>Grows the <span class="grad">community</span></span></div>
+    </div>
+  </div>
+
+  <!-- G: end card -->
+  <div class="scene" id="sG">
+    <div class="abs" style="left:0;right:0;top:250px;text-align:center">
+      <div style="display:inline-flex;align-items:center;gap:24px">
+        <div class="logo-dot" style="width:110px;height:110px;border-radius:32px">
+          <svg width="66" height="66" viewBox="0 0 40 40" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round"><path d="M12 34c-4-6 4-9 0-15s3-10 3-14"/><path d="M21 34c-4-6 4-9 0-15s3-10 3-14"/><path d="M30 34c-4-6 4-9 0-15"/></svg>
+        </div>
+        <div style="font-size:120px;font-weight:900;letter-spacing:-3px">Smoke</div>
+      </div>
+      <div id="gTitle" class="grad" style="font-size:170px;font-weight:900;letter-spacing:-5px;line-height:1.1;margin-top:10px">Play to Win</div>
+      <div id="gSub" style="font-size:38px;color:var(--mute);font-weight:600;margin-top:24px">Free to play · Skill-based · Invite your friends</div>
+    </div>
+  </div>
+
+  <div id="flash" class="abs" style="inset:0;background:#fff;opacity:0;z-index:90"></div>
+  <div id="caption"></div>
+</div>
+
+<script>
+const TIMING = window.TIMING || [];
+const $ = id => document.getElementById(id);
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const P = (t, a, b) => clamp((t - a) / (b - a));
+const eo = x => 1 - Math.pow(1 - x, 3);
+const eio = x => x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+const back = x => { const c = 1.9; return 1 + (c + 1) * Math.pow(x - 1, 3) + c * Math.pow(x - 1, 2); };
+const lerp = (a, b, x) => a + (b - a) * x;
+function rnd(seed) { let s = seed; return () => (s = (s * 16807) % 2147483647) / 2147483647; }
+// scene visibility with fade in/out; returns local "enter" progress
+function scene(el, t, a, b, f = .35) {
+  const o = Math.min(P(t, a, a + f), 1 - P(t, b - f, b));
+  el.style.opacity = o; el.style.display = o > 0 ? 'block' : 'none';
+  return o;
+}
+function pop(el, t, a, d = .45, from = 30) {
+  const x = P(t, a, a + d);
+  el.style.opacity = clamp(x * 3);
+  el.style.transform = `translateY(${(1 - eo(x)) * from}px) scale(${lerp(.6, 1, back(x))})`;
+}
+function tap(el, t, at) {
+  const x = P(t, at - .15, at + .35);
+  el.style.opacity = x > 0 && x < 1 ? (x < .3 ? x / .3 : 1 - (x - .3) / .7) : 0;
+  el.style.transform = `scale(${lerp(1.4, .8, eo(x))})`;
+}
+
+// ---- build dynamic DOM ----
+const title = 'PLAY TO WIN';
+$('bTitle').innerHTML = [...title].map(c => `<span class="grad" style="display:inline-block;${c === ' ' ? 'width:60px' : ''}">${c === ' ' ? '' : c}</span>`).join('');
+const PLAYERS = [
+  { n: '@shiku.w', s: 4820, c: '#4da3ff' }, { n: '@brayo_ke', s: 4510, c: '#2bd67b' },
+  { n: '@nyambura', s: 4175, c: '#ff3d8b' }, { n: '@otieno.jr', s: 3900, c: '#ffc53d' },
+  { n: '@wairimu', s: 3640, c: '#7b5cff' }, { n: '@kevo254', s: 3100, c: '#ff5a36', me: true },
+];
+$('eRows').innerHTML = PLAYERS.map((p, i) => `<div class="row" id="r${i}" ${p.me ? 'style="background:linear-gradient(90deg,rgba(255,90,54,.35),rgba(123,92,255,.35));border:2px solid #ff5a36"' : ''}><span class="rk" id="rk${i}"></span><span class="av" style="background:${p.c}"></span><span>${p.n}${p.me ? ' <span style="color:var(--gold)">(you)</span>' : ''}</span><span class="sc" id="sc${i}"></span><span id="cr${i}" style="font-size:34px;width:40px"></span></div>`).join('');
+// game targets
+const R = rnd(7), TARGETS = [];
+for (let i = 0; i < 12; i++) TARGETS.push({ x: 60 + R() * 260, y: 60 + R() * 520, at: 14.0 + i * .17, c: ['#ff5a36', '#ff3d8b', '#7b5cff', '#ffc53d'][i % 4] });
+$('eField').innerHTML = TARGETS.map((g, i) => `<div id="g${i}" class="abs" style="left:${g.x}px;top:${g.y}px;width:84px;height:84px;border-radius:50%;border:12px solid ${g.c};box-shadow:0 0 30px ${g.c}"></div><div id="gp${i}" class="abs" style="left:${g.x + 10}px;top:${g.y - 10}px;font-weight:900;font-size:28px;color:var(--gold)">+150</div>`).join('') + '<div class="tap" id="eTap"></div>';
+// dollars
+const DR = rnd(42), DOL = [];
+for (let i = 0; i < 70; i++) DOL.push({ t0: 17.45 + i * .075, vx: (DR() - .5) * 900, vy: -(700 + DR() * 650), rot: (DR() - .5) * 720, s: 40 + DR() * 60 });
+$('fDollars').innerHTML = DOL.map((d, i) => `<div class="dollar" id="d${i}" style="font-size:${d.s}px">$</div>`).join('');
+
+// ---- render ----
+function render(t) {
+  // background blobs drift like smoke
+  $('b1').style.transform = `translate(${-150 + Math.sin(t * .4) * 200}px,${-200 + Math.cos(t * .3) * 120}px)`;
+  $('b2').style.transform = `translate(${1300 + Math.cos(t * .35) * 220}px,${400 + Math.sin(t * .45) * 160}px)`;
+  $('b3').style.transform = `translate(${700 + Math.sin(t * .25 + 2) * 300}px,${650 + Math.cos(t * .4) * 100}px)`;
+
+  // A: 0 - 4.7
+  if (scene($('sA'), t, -1, 4.75)) {
+    const x = P(t, .15, .9);
+    $('aLogo').style.transform = `scale(${lerp(.7, 1, back(x))})`; $('aLogo').style.opacity = clamp(x * 2);
+    pop($('aT1'), t, 1.2, .5); pop($('aT2'), t, 2.7, .5);
+    $('aT1').style.display = $('aT2').style.display = 'inline-block';
+    [['bb1', .8], ['bb2', 1.5], ['bb3', 2.3], ['bb4', 3.0]].forEach(([id, a], i) => {
+      pop($(id), t, a, .5); $(id).style.transform += ` translateY(${Math.sin(t * 2 + i) * 8}px)`;
+    });
+  }
+  // B: 4.7 - 6.7
+  if (scene($('sB'), t, 4.6, 6.75, .3)) {
+    pop($('bKick'), t, 4.75, .4);
+    [...$('bTitle').children].forEach((s, i) => {
+      const x = P(t, 4.85 + i * .05, 5.2 + i * .05);
+      s.style.opacity = clamp(x * 3); s.style.transform = `translateY(${(1 - eo(x)) * -120}px) scale(${lerp(2, 1, eo(x))})`;
+    });
+    pop($('bTro'), t, 5.55, .5, 80);
+    $('bTro').style.transform += ` rotate(${Math.sin(t * 6) * 6}deg)`;
+  }
+  // C: 6.7 - 10.45  (handle entry)
+  if (scene($('sC'), t, 6.65, 10.5)) {
+    const x = P(t, 6.65, 7.3);
+    $('cPhone').style.transform = `translateY(${(1 - eo(x)) * 200}px) rotate(${(1 - eo(x)) * -6}deg)`;
+    const cx = P(t, 6.9, 7.5); $('cCall').style.opacity = cx; $('cCall').style.transform = `translateX(${(1 - eo(cx)) * 60}px)`;
+    const handle = 'kevo254', at = t > 7.35 ? '@' : '';
+    const n = Math.floor(clamp((t - 7.5) / .14, 0, handle.length));
+    $('cAt').textContent = at; $('cAt').style.color = '#fff'; $('cTyped').textContent = handle.slice(0, n);
+    $('cCaret').style.opacity = t < 9.35 && (Math.floor(t * 3) % 2 === 0 || (t > 7.35 && t < 8.6)) ? 1 : 0;
+    $('cInput').style.borderColor = t > 7.35 && t < 9.4 ? '#ff3d8b' : '#3a3152';
+    pop($('cCard'), t, 8.65, .4, 20);
+    tap($('cTap'), t, 9.4);
+    const done = t > 9.45;
+    $('cBtn').textContent = done ? '✔ Referral added' : 'Confirm referral';
+    $('cBtn').style.background = done ? 'var(--green)' : '';
+    $('cBtn').style.transform = `scale(${t > 9.3 && t < 9.5 ? .95 : 1})`;
+  }
+  // D: 10.45 - 13.9 (referrer counter)
+  if (scene($('sD'), t, 10.4, 13.95)) {
+    const x = P(t, 10.4, 11.0);
+    $('dPhone').style.transform = `translateY(${(1 - eo(x)) * 200}px) rotate(${(1 - eo(x)) * 6}deg)`;
+    const cx = P(t, 10.6, 11.2); $('dCall').style.opacity = cx; $('dCall').style.transform = `translateX(${(1 - eo(cx)) * -60}px)`;
+    const ty = P(t, 10.75, 11.1), tout = P(t, 12.9, 13.2);
+    $('dToast').style.transform = `translateY(${(1 - eo(ty)) * -160 - eo(tout) * 160}px)`;
+    const sw = P(t, 11.35, 11.6);
+    $('dNumOld').style.opacity = 1 - sw; $('dNumOld').style.transform = `translateY(${-sw * 60}px)`;
+    $('dNumNew').style.opacity = sw; $('dNumNew').style.transform = `translateY(${(1 - sw) * 60}px) scale(${1 + Math.sin(P(t, 11.5, 12) * Math.PI) * .25})`;
+    const pl = P(t, 11.4, 12.4); $('dPlus').style.opacity = pl > 0 && pl < 1 ? 1 - pl : 0; $('dPlus').style.transform = `translateY(${-pl * 60}px)`;
+    $('dRing').style.transform = `scale(${1 + Math.sin(P(t, 11.4, 11.9) * Math.PI) * .12})`;
+    $('dRing').style.borderColor = t > 11.4 ? 'var(--green)' : 'var(--pink)';
+    $('dRing').style.boxShadow = t > 11.4 ? '0 0 60px rgba(43,214,123,.6)' : '0 0 50px rgba(255,61,139,.5)';
+    pop($('dConf'), t, 11.9, .4, 20);
+    $('dFriends').textContent = t > 11.4 ? '1' : '0';
+    $('dBtn').style.transform = `scale(${t > 12.3 ? 1 + Math.sin((t - 12.3) * 9) * .03 : 1})`;
+    tap($('dTap'), t, 13.35);
+  }
+  // E: 13.9 - 16.3 (game + leaderboard)
+  if (scene($('sE'), t, 13.85, 16.3)) {
+    const x = P(t, 13.85, 14.3);
+    $('eBoard').style.opacity = x; $('eBoard').style.transform = `translateX(${(1 - eo(x)) * 60}px)`;
+    let score = 0, tapEl = $('eTap');
+    TARGETS.forEach((g, i) => {
+      const a = P(t, g.at - .35, g.at - .05), popx = P(t, g.at, g.at + .25);
+      const el = $('g' + i);
+      el.style.opacity = t < g.at ? a : 1 - popx;
+      el.style.transform = `scale(${t < g.at ? back(a) * .9 : 1 + popx * .6})`;
+      const gp = P(t, g.at, g.at + .6); $('gp' + i).style.opacity = gp > 0 && gp < 1 ? 1 - gp : 0; $('gp' + i).style.transform = `translateY(${-gp * 50}px)`;
+      if (t >= g.at) score += 150;
+      if (Math.abs(t - g.at) < .2) { tapEl.style.left = (g.x + 7) + 'px'; tapEl.style.top = (g.y + 137) + 'px'; tap(tapEl, t, g.at); }
+    });
+    $('eScore').textContent = (3100 + score).toLocaleString('en-US');
+    // leaderboard: my score climbs from 3100 to 4900
+    const me = 3100 + score;
+    const list = PLAYERS.map((p, i) => ({ i, s: p.me ? me : p.s })).sort((a, b) => b.s - a.s);
+    list.forEach((o, rank) => {
+      const row = $('r' + o.i);
+      const prev = parseFloat(row.dataset.y ?? rank * 92);
+      const y = lerp(prev, rank * 92, .35); row.dataset.y = y;
+      row.style.top = y + 'px';
+      $('rk' + o.i).textContent = '#' + (rank + 1);
+      $('sc' + o.i).textContent = o.s.toLocaleString('en-US');
+      $('cr' + o.i).textContent = rank === 0 ? '👑' : '';
+      row.style.zIndex = PLAYERS[o.i].me ? 5 : 1;
+    });
+  }
+  // F: 16.1 - 23.0 (bottle, chest, dollars, badges)
+  if (scene($('sF'), t, 16.1, 23.05)) {
+    const sx = P(t, 16.1, 16.6); $('fStep').style.opacity = sx * (1 - P(t, 17.6, 18.0));
+    const shift = eio(P(t, 17.6, 18.3));           // chest slides left for badges
+    const cx = lerp(960, 560, shift), cy = 600;
+    const w1 = [], w2 = [];
+    for (let X = 0; X <= 1920; X += 40) { w1.push(`${X},${60 + Math.sin(X / 160 + t * 2) * 18}`); w2.push(`${X},${100 + Math.sin(X / 120 - t * 2.4) * 16}`); }
+    $('fWave').setAttribute('d', `M0,320 L${w1.join(' L')} L1920,320 Z`);
+    $('fWave2').setAttribute('d', `M0,320 L${w2.join(' L')} L1920,320 Z`);
+    $('fSea').style.opacity = 1 - P(t, 17.6, 18.2) * .6;
+    // bottle floats in, shakes, bursts
+    const bIn = P(t, 16.1, 16.7), shake = P(t, 16.7, 17.05);
+    $('fBottle').style.left = (lerp(-200, cx - 65, eo(bIn)) + Math.sin(t * 50) * 10 * shake) + 'px';
+    $('fBottle').style.top = (cy - 160 + Math.sin(t * 3) * 14) + 'px';
+    $('fBottle').style.transform = `rotate(${Math.sin(t * 2.5) * 10 + Math.sin(t * 60) * 8 * shake}deg)`;
+    $('fBottle').style.opacity = t < 17.05 ? 1 : 0;
+    $('flash').style.opacity = t > 17.0 && t < 17.4 ? 1 - P(t, 17.05, 17.4) : 0;
+    const ch = P(t, 17.05, 17.4);
+    $('fChest').style.opacity = t > 17.05 ? 1 : 0;
+    $('fChest').style.left = (cx - 180) + 'px'; $('fChest').style.top = (cy - 180 + Math.sin(t * 3) * 6) + 'px';
+    $('fChest').style.transform = `scale(${lerp(.3, 1, back(ch))})`;
+    $('fLid').style.transform = `perspective(700px) rotateX(${-eo(P(t, 17.3, 17.65)) * 105}deg)`;
+    $('fGlow').style.left = (cx - 450) + 'px'; $('fGlow').style.top = (cy - 500) + 'px';
+    $('fGlow').style.opacity = P(t, 17.35, 17.7) * (.85 + Math.sin(t * 5) * .15);
+    $('fGlow').style.transform = `scale(${1 + Math.sin(t * 3) * .05}) rotate(${t * 20}deg)`;
+    const g = 1500;
+    DOL.forEach((d, i) => {
+      const el = $('d' + i), lt = t - d.t0;
+      if (lt < 0 || lt > 1.8) { el.style.opacity = 0; return; }
+      el.style.opacity = 1 - P(lt, 1.3, 1.8);
+      el.style.left = (cx - 20 + d.vx * lt) + 'px';
+      el.style.top = (cy - 140 + d.vy * lt + g * lt * lt / 2) + 'px';
+      el.style.transform = `rotate(${d.rot * lt}deg) scale(${lerp(.3, 1, P(lt, 0, .25))})`;
+    });
+    [['fb1', 17.75], ['fb2', 19.2], ['fb3', 20.75]].forEach(([id, a]) => {
+      const x = P(t, a, a + .45); $(id).style.opacity = x;
+      $(id).style.transform = `translateX(${(1 - eo(x)) * 120}px) scale(${lerp(.8, 1, back(x))})`;
+    });
+  }
+  // G: end card 23.0 - 26
+  if (scene($('sG'), t, 22.95, 99, .4)) {
+    pop($('gTitle'), t, 23.2, .55, 40); pop($('gSub'), t, 23.8, .5, 20);
+  }
+  // captions
+  const cap = TIMING.find(c => t >= c.start - .1 && t <= c.end + .3);
+  $('caption').style.opacity = cap ? 1 : 0;
+  if (cap) $('caption').textContent = cap.text;
+}
+window.render = render;
+if (!window.RENDERING) { const t0 = performance.now(); (function loop() { render(((performance.now() - t0) / 1000) % 26); requestAnimationFrame(loop); })(); }
+</script>
+</body>
+</html>
