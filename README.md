@@ -1,6 +1,6 @@
 # Smoke – Play to Win explainer video
 
-28.5s, 1920×1080 landscape explainer. Output: `out/play_to_win.mp4`.
+28.5s, 1080×1920 portrait explainer. Output: `out/play_to_win.mp4`.
 
 ## Build
 ```bash

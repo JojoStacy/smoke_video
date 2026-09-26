@@ -12,7 +12,7 @@ const timing = JSON.parse(fs.readFileSync(path.join(root, 'audio/timing.json'), 
 const ffmpeg = process.env.FFMPEG || 'ffmpeg';
 
 const browser = await chromium.launch({ executablePath: process.env.CHROMIUM || undefined });
-const page = await browser.newPage({ viewport: { width: 1920, height: 1080 } });
+const page = await browser.newPage({ viewport: { width: 1080, height: 1920 } });
 await page.addInitScript(t => { window.RENDERING = true; window.TIMING = t; }, timing);
 await page.goto('file://' + path.join(root, 'src/index.html'));
 await page.evaluate(() => document.fonts.ready);
