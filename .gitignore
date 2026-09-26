@@ -2,3 +2,4 @@ node_modules/
 frames/
 *.wav.tmp
 out/stills/
+.DS_Store
