@@ -4,188 +4,224 @@
 <meta charset="utf-8">
 <title>Smoke – Play to Win</title>
 <style>
-@font-face{font-family:P;font-weight:400;src:url(../node_modules/@fontsource/poppins/files/poppins-latin-400-normal.woff2)}
-@font-face{font-family:P;font-weight:600;src:url(../node_modules/@fontsource/poppins/files/poppins-latin-600-normal.woff2)}
-@font-face{font-family:P;font-weight:800;src:url(../node_modules/@fontsource/poppins/files/poppins-latin-800-normal.woff2)}
-@font-face{font-family:P;font-weight:900;src:url(../node_modules/@fontsource/poppins/files/poppins-latin-900-normal.woff2)}
-:root{--bg:#0c0a14;--ink:#fff;--mute:#a9a3c2;--hot:#ff5a36;--pink:#ff3d8b;--violet:#7b5cff;--gold:#ffc53d;--green:#2bd67b;--card:#1a1626}
+@font-face{font-family:R;font-weight:400;src:url(../node_modules/@fontsource/roboto/files/roboto-latin-400-normal.woff2)}
+@font-face{font-family:R;font-weight:400;font-style:italic;src:url(../node_modules/@fontsource/roboto/files/roboto-latin-400-italic.woff2)}
+@font-face{font-family:R;font-weight:500;src:url(../node_modules/@fontsource/roboto/files/roboto-latin-500-normal.woff2)}
+@font-face{font-family:R;font-weight:700;src:url(../node_modules/@fontsource/roboto/files/roboto-latin-700-normal.woff2)}
+@font-face{font-family:R;font-weight:900;src:url(../node_modules/@fontsource/roboto/files/roboto-latin-900-normal.woff2)}
+@font-face{font-family:W;font-weight:900;src:url(../node_modules/@fontsource/playfair-display/files/playfair-display-latin-900-normal.woff2)}
+:root{--navy:#0f1729;--amber:#fbb829;--card:#2d3139;--mute:#9ba1ab;--green:#2bd67b;--wood:#6b2e1a}
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{width:1920px;height:1080px;overflow:hidden;background:var(--bg);font-family:P,'Noto Color Emoji',sans-serif;color:var(--ink)}
+html,body{width:1920px;height:1080px;overflow:hidden;background:#07090f;font-family:R,'Noto Color Emoji',sans-serif;color:#fff}
 .abs{position:absolute}
-#stage{position:relative;width:1920px;height:1080px;overflow:hidden}
-.blob{position:absolute;border-radius:50%;filter:blur(90px);opacity:.55}
+#stage{position:relative;width:1920px;height:1080px;overflow:hidden;background:radial-gradient(circle at 50% 40%,#131c33,#07090f 75%)}
+.smoke{position:absolute;border-radius:50%;filter:blur(70px);background:radial-gradient(circle,rgba(170,185,210,.35),rgba(170,185,210,0) 70%)}
 .scene{position:absolute;inset:0;opacity:0}
-.grad{background:linear-gradient(90deg,var(--hot),var(--pink),var(--violet));-webkit-background-clip:text;background-clip:text;color:transparent}
+.amber{color:var(--amber)}
+.wm{font-family:W;font-weight:900;letter-spacing:-2px;line-height:1}
+.wm b{color:var(--amber);font-weight:900}
 /* phone */
-.phone{position:absolute;width:430px;height:880px;border-radius:64px;background:#05040a;padding:16px;box-shadow:0 40px 120px rgba(0,0,0,.6),0 0 0 3px #2c2640 inset}
-.screen{position:relative;width:100%;height:100%;border-radius:50px;overflow:hidden;background:linear-gradient(180deg,#171325,#0f0c19)}
-.notch{position:absolute;top:14px;left:50%;transform:translateX(-50%);width:120px;height:32px;border-radius:20px;background:#000;z-index:5}
-.sbar{position:absolute;top:18px;left:34px;right:34px;display:flex;justify-content:space-between;font-size:17px;font-weight:600}
-.apphead{position:absolute;top:70px;left:28px;right:28px;display:flex;align-items:center;gap:12px;font-weight:800;font-size:26px}
-.logo-dot{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,var(--hot),var(--pink),var(--violet));display:grid;place-items:center}
-.label{font-size:18px;color:var(--mute);font-weight:600}
-.input{height:70px;border-radius:20px;background:#221c33;border:2px solid #3a3152;display:flex;align-items:center;padding:0 22px;font-size:26px;font-weight:600}
-.btn{height:70px;border-radius:22px;display:grid;place-items:center;font-size:24px;font-weight:800;background:linear-gradient(90deg,var(--hot),var(--pink));}
-.tap{position:absolute;width:70px;height:70px;border-radius:50%;border:5px solid rgba(255,255,255,.9);background:rgba(255,255,255,.25);opacity:0;z-index:20}
-.callout{position:absolute;font-weight:800;font-size:64px;line-height:1.1;letter-spacing:-1px}
-.step{display:inline-block;font-size:24px;font-weight:800;padding:8px 18px;border-radius:40px;background:rgba(255,255,255,.1);color:var(--gold);margin-bottom:22px;letter-spacing:1px}
+.phone{position:absolute;width:430px;height:860px;border-radius:60px;background:#e8e8ea;padding:12px;box-shadow:0 40px 120px rgba(0,0,0,.7)}
+.screen{position:relative;width:100%;height:100%;border-radius:50px;overflow:hidden;background:#000}
+.sbar{position:absolute;top:14px;left:30px;right:30px;display:flex;justify-content:space-between;font-size:16px;font-weight:500;color:#ddd}
+.ptw-head{position:absolute;top:50px;left:0;right:0;height:60px;display:flex;align-items:center;padding:0 22px;gap:26px;font-size:28px;font-weight:700}
+.ptw-head .r{margin-left:auto;display:flex;gap:30px;font-size:24px}
+.tabs{position:absolute;top:118px;left:0;right:0;height:52px;display:flex;border-bottom:2px solid #444}
+.tabs div{flex:1;text-align:center;color:var(--amber);font-weight:500;font-size:20px;padding-top:10px;position:relative}
+.tabs .on:after{content:'';position:absolute;left:0;right:0;bottom:-2px;height:4px;background:var(--amber)}
+.card{position:absolute;left:18px;right:18px;border-radius:22px;background:var(--card);padding:18px}
+.game-ic{width:66px;height:66px;border-radius:14px;background:radial-gradient(circle at 50% 40%,#e05cff,#5a1680 60%,#2a0a40);display:grid;place-items:center;font-size:34px}
+.pill{height:54px;border-radius:30px;display:flex;align-items:center;justify-content:center;gap:10px;font-size:20px;font-weight:700}
+.p-amber{background:var(--amber);color:#111}
+.p-line{border:2.5px solid var(--amber);color:var(--amber)}
+.inp{height:58px;border:1.5px solid #3f444d;border-radius:6px;display:flex;align-items:center;padding:0 16px;font-size:20px}
+.tap{position:absolute;width:64px;height:64px;margin:-32px 0 0 -32px;border-radius:50%;border:5px solid rgba(255,255,255,.95);background:rgba(255,255,255,.3);opacity:0;z-index:40}
+.callout{position:absolute;font-weight:900;font-size:66px;line-height:1.08;letter-spacing:-1px}
+.step{display:inline-block;font-size:22px;font-weight:700;padding:8px 18px;border-radius:40px;background:rgba(251,184,41,.15);color:var(--amber);margin-bottom:22px;letter-spacing:2px}
 .sub{font-size:30px;color:var(--mute);font-weight:400;margin-top:20px;letter-spacing:0}
-.bubble{position:absolute;padding:22px 30px;border-radius:30px;font-size:30px;font-weight:600;white-space:nowrap}
-.row{position:absolute;left:0;right:0;height:78px;border-radius:20px;background:#1d1830;display:flex;align-items:center;padding:0 24px;gap:18px;font-size:26px;font-weight:600}
-.row .rk{width:44px;color:var(--mute);font-weight:800}
-.row .av{width:48px;height:48px;border-radius:50%}
-.row .sc{margin-left:auto;font-weight:800}
-.badge{position:absolute;left:0;display:flex;align-items:center;gap:22px;padding:24px 36px;border-radius:30px;background:rgba(255,255,255,.08);border:2px solid rgba(255,255,255,.14);font-size:44px;font-weight:800;white-space:nowrap}
-.dollar{position:absolute;font-weight:900;color:var(--gold);text-shadow:0 0 20px rgba(255,197,61,.8),0 4px 0 #b37a00}
-#caption{position:absolute;left:50%;bottom:48px;transform:translateX(-50%);max-width:1500px;text-align:center;font-size:36px;font-weight:600;padding:12px 30px;border-radius:18px;background:rgba(0,0,0,.55);opacity:0;z-index:100}
+.bubble{position:absolute;padding:20px 28px;border-radius:28px;font-size:28px;font-weight:500;white-space:nowrap;background:#1b2338;border:1.5px solid #2c3754}
+.bubble.hot{background:var(--amber);color:#111;border:0;font-weight:700}
+.lrow{position:absolute;left:0;right:0;height:64px;display:flex;align-items:center;gap:16px;font-size:21px;padding:0 6px;border-radius:12px}
+.lrow .rk{width:40px;color:var(--mute)}
+.lrow .sc{margin-left:auto}
+.lrow .pz{width:112px;text-align:right;color:var(--amber);font-weight:700}
+.badge{position:absolute;left:0;display:flex;align-items:center;gap:22px;padding:22px 34px;border-radius:26px;background:rgba(15,23,41,.82);border:2px solid rgba(251,184,41,.55);font-size:44px;font-weight:900;white-space:nowrap}
+.fly{position:absolute;left:0;top:0;will-change:transform}
+.dol{font-weight:900;color:#ffd24a;font-family:R;text-shadow:0 0 18px rgba(255,200,60,.9),0 4px 0 #a86f00}
+.kes{padding:8px 16px;border-radius:8px;background:linear-gradient(135deg,#2f9e57,#1c6b3a);border:3px solid #9fe0b5;color:#eafff0;font-weight:900;font-size:30px;box-shadow:0 6px 20px rgba(0,0,0,.4);white-space:nowrap}
+.coin{width:56px;height:56px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#fff3b0,#fbb829 45%,#b87800);border:3px solid #ffe07a;display:grid;place-items:center;font-weight:900;color:#8a5400;font-size:26px}
+#caption{position:absolute;left:50%;bottom:44px;transform:translateX(-50%);max-width:1500px;text-align:center;font-size:36px;font-weight:500;padding:12px 30px;border-radius:16px;background:rgba(0,0,0,.6);opacity:0;z-index:100;white-space:nowrap}
 </style>
 </head>
 <body>
 <div id="stage">
-  <div class="blob" id="b1" style="width:700px;height:700px;background:#ff5a36"></div>
-  <div class="blob" id="b2" style="width:800px;height:800px;background:#7b5cff"></div>
-  <div class="blob" id="b3" style="width:600px;height:600px;background:#ff3d8b"></div>
+  <div class="smoke" id="s1" style="width:800px;height:800px"></div>
+  <div class="smoke" id="s2" style="width:900px;height:700px"></div>
+  <div class="smoke" id="s3" style="width:700px;height:700px"></div>
+
+  <!-- chest SVG template (reused) -->
+  <svg width="0" height="0" style="position:absolute">
+    <defs>
+      <linearGradient id="wood" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8b3a22"/><stop offset="1" stop-color="#4a1c10"/></linearGradient>
+      <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe07a"/><stop offset="1" stop-color="#c98a12"/></linearGradient>
+      <g id="chestBase"><rect x="10" y="0" width="340" height="170" rx="14" fill="url(#wood)" stroke="#2b120a" stroke-width="6"/><rect x="10" y="60" width="340" height="18" fill="#3a1a10"/><rect x="60" y="0" width="20" height="170" fill="url(#gold)"/><rect x="280" y="0" width="20" height="170" fill="url(#gold)"/><rect x="150" y="-10" width="60" height="78" rx="10" fill="url(#gold)" stroke="#7a4d00" stroke-width="3"/><circle cx="180" cy="26" r="9" fill="#5a3400"/><rect x="176" y="28" width="8" height="20" fill="#5a3400"/><path d="M10 150h28v20H10zM322 150h28v20h-28z" fill="url(#gold)"/></g>
+      <g id="chestLid"><path d="M10 110 V70 C10 20 60 0 180 0 C300 0 350 20 350 70 V110 Z" fill="url(#wood)" stroke="#2b120a" stroke-width="6"/><rect x="60" y="4" width="20" height="106" fill="url(#gold)"/><rect x="280" y="4" width="20" height="106" fill="url(#gold)"/><path d="M14 96h332v14H14z" fill="url(#gold)"/></g>
+      <g id="bottle"><rect x="40" y="0" width="24" height="18" rx="4" fill="#a0703f"/><path d="M42 16h20v34c0 8 30 18 30 46v112c0 12-8 20-20 20H32c-12 0-20-8-20-20V96c0-28 30-38 30-46z" fill="rgba(210,240,255,.35)" stroke="rgba(235,250,255,.95)" stroke-width="4"/><rect x="26" y="96" width="52" height="118" rx="10" fill="#f1d9a4"/><path d="M26 110h52M26 200h52" stroke="#d9b877" stroke-width="4"/><circle cx="52" cy="152" r="11" fill="#c0282d"/><path d="M47 160l-6 16M57 160l6 16" stroke="#c0282d" stroke-width="5"/></g>
+    </defs>
+  </svg>
 
   <!-- A: intro -->
   <div class="scene" id="sA">
-    <div class="abs" id="aLogo" style="left:0;right:0;top:330px;text-align:center">
-      <div style="display:inline-flex;align-items:center;gap:28px">
-        <div class="logo-dot" style="width:130px;height:130px;border-radius:38px">
-          <svg width="80" height="80" viewBox="0 0 40 40" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round"><path d="M12 34c-4-6 4-9 0-15s3-10 3-14"/><path d="M21 34c-4-6 4-9 0-15s3-10 3-14"/><path d="M30 34c-4-6 4-9 0-15"/></svg>
-        </div>
-        <div style="font-size:150px;font-weight:900;letter-spacing:-4px">Smoke</div>
-      </div>
+    <div class="abs" id="aLogo" style="left:0;right:0;top:300px;text-align:center"><div class="wm" style="font-size:230px">sm<b>o</b>ke</div></div>
+    <div class="abs" style="left:0;right:0;top:590px;text-align:center;font-size:62px;font-weight:900" class="amber">
+      <span id="aT1" class="amber">Real conversations.</span> <span id="aT2">Real connections.</span>
     </div>
-    <div class="abs" style="left:0;right:0;top:560px;text-align:center;font-size:58px;font-weight:800">
-      <span id="aT1">Real conversations.</span> <span id="aT2" class="grad">Real connections.</span>
-    </div>
-    <div class="bubble" id="bb1" style="left:150px;top:150px;background:#2a2340">Niaje! 👋</div>
-    <div class="bubble" id="bb2" style="right:160px;top:190px;background:linear-gradient(90deg,var(--hot),var(--pink))">Let's link up this weekend 🔥</div>
-    <div class="bubble" id="bb3" style="left:220px;top:780px;background:linear-gradient(90deg,var(--violet),var(--pink))">Who's joining the convo? 🎙️</div>
-    <div class="bubble" id="bb4" style="right:230px;top:760px;background:#2a2340">Sawa sawa 😂</div>
+    <div class="bubble" id="bb1" style="left:140px;top:140px">Should you tell your partner everything? 🤔</div>
+    <div class="bubble hot" id="bb2" style="right:150px;top:215px">Bold take or facts? 🔥</div>
+    <div class="bubble hot" id="bb3" style="left:230px;top:790px">Who's pulling up to karaoke night? 🎤</div>
+    <div class="bubble" id="bb4" style="right:220px;top:760px">Sawa sawa 😂</div>
   </div>
 
   <!-- B: feature title -->
   <div class="scene" id="sB">
-    <div class="abs" style="left:0;right:0;top:250px;text-align:center;font-size:40px;font-weight:600;color:var(--mute)" id="bKick">NEW ON SMOKE</div>
-    <div class="abs" id="bTitle" style="left:0;right:0;top:330px;text-align:center;font-size:230px;font-weight:900;letter-spacing:-6px;line-height:1"></div>
-    <div class="abs" id="bTro" style="left:0;right:0;top:620px;text-align:center;font-size:150px">🏆</div>
+    <div class="abs" style="left:0;right:0;top:240px;text-align:center;font-size:40px;font-weight:700;letter-spacing:8px;color:var(--mute)" id="bKick">NEW ON SMOKE</div>
+    <div class="abs" id="bTitle" style="left:0;right:0;top:320px;text-align:center;font-size:220px;font-weight:900;letter-spacing:-5px;line-height:1"></div>
+    <div class="abs" id="bTro" style="left:0;right:0;top:600px;text-align:center;font-size:150px">🏆</div>
   </div>
 
-  <!-- C: new user enters handle -->
+  <!-- C: new user enters referrer handle -->
   <div class="scene" id="sC">
-    <div class="phone" id="cPhone" style="left:300px;top:100px">
+    <div class="phone" id="cPhone" style="left:300px;top:60px">
       <div class="screen">
-        <div class="notch"></div>
-        <div class="sbar"><span>9:41</span><span>●●● 5G</span></div>
-        <div class="apphead"><div class="logo-dot">🔥</div>Smoke</div>
-        <div class="abs" style="top:170px;left:28px;right:28px">
-          <div style="font-size:36px;font-weight:800;line-height:1.15">Welcome, @amani!</div>
-          <div class="label" style="margin-top:10px">Were you invited by a friend? Enter their handle so they get a chance to win.</div>
-          <div class="label" style="margin-top:44px;margin-bottom:12px;color:#fff">Referrer's handle</div>
-          <div class="input" id="cInput"><span style="color:var(--mute)" id="cAt"></span><span id="cTyped"></span><span id="cCaret" style="display:inline-block;width:3px;height:34px;background:var(--pink);margin-left:3px"></span></div>
-          <div id="cCard" style="margin-top:18px;height:92px;border-radius:20px;background:#221c33;display:flex;align-items:center;gap:16px;padding:0 20px;opacity:0">
-            <div class="av" style="width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#ffc53d,#ff5a36)"></div>
-            <div><div style="font-weight:800;font-size:24px">Kevo <span style="color:#4da3ff">✔</span></div><div class="label">@kevo254</div></div>
-          </div>
+        <div class="sbar"><span>7:31</span><span>5G ▮▮▮ 72%</span></div>
+        <div class="ptw-head"><span>←</span><span>Play to Win</span><span class="r"><span>?</span><span>⟳</span></span></div>
+        <div class="tabs"><div class="on">Play</div><div>Leaderboard</div></div>
+        <div class="card" style="top:192px;display:flex;gap:16px;align-items:center">
+          <div class="game-ic">🍬</div>
+          <div><div style="font-size:22px;font-weight:700">Candy Shooter</div><div style="color:var(--mute);font-size:17px">Get the highest score you can to win!</div></div>
         </div>
-        <div class="abs btn" id="cBtn" style="left:28px;right:28px;bottom:70px">Confirm referral</div>
-        <div class="tap" id="cTap" style="left:180px;bottom:70px"></div>
+        <div class="card" style="top:320px">
+          <div style="color:var(--mute);font-size:17px">2 chances left this week · best today: 0</div>
+          <div style="display:flex;gap:14px;margin-top:14px"><div class="pill p-amber" style="flex:1"><span style="display:inline-block;border-left:14px solid #111;border-top:9px solid transparent;border-bottom:9px solid transparent"></span> Play</div><div class="pill p-line" style="flex:1">+ Invite</div></div>
+        </div>
+        <div class="card" style="top:478px;border:2.5px solid var(--amber);background:#2a2e36">
+          <div style="color:var(--amber);font-size:22px;font-weight:700">🎁 Who invited you?</div>
+          <div style="font-size:18px;margin:10px 0 16px;line-height:1.45">Enter their handle so they get a chance to play too.</div>
+          <div class="inp" id="cInput"><span id="cPh" style="color:var(--mute)">their handle</span><span id="cTyped"></span><span id="cCaret" style="display:inline-block;width:2px;height:26px;background:var(--amber);margin-left:2px"></span></div>
+          <div id="cBtn" style="text-align:center;font-size:20px;font-weight:700;color:#8a8f98;margin-top:18px;height:40px;line-height:40px;border-radius:20px">Confirm</div>
+        </div>
+        <div class="tap" id="cTap" style="left:203px;top:774px"></div>
       </div>
     </div>
-    <div class="callout" id="cCall" style="left:880px;top:330px">
-      <div class="step">STEP 1</div><br>New user enters<br><span class="grad">the referrer's handle</span>
-      <div class="sub">Sign up and type in who invited you.</div>
+    <div class="callout" id="cCall" style="left:880px;top:320px">
+      <div class="step">STEP 1</div><br>New user enters<br><span class="amber">the referrer's handle</span>
+      <div class="sub">Just joined? Tell us who invited you.</div>
     </div>
   </div>
 
-  <!-- D: referrer counter -->
+  <!-- D: referrer's chance counter -->
   <div class="scene" id="sD">
-    <div class="callout" id="dCall" style="left:170px;top:330px">
-      <div class="step">STEP 2</div><br>Referrer's chances<br><span class="grad">go up instantly</span>
-      <div class="sub">Referral confirmed. Time to play.</div>
+    <div class="callout" id="dCall" style="left:170px;top:320px">
+      <div class="step">STEP 2</div><br>Referrer gets<br><span class="amber">an extra chance</span>
+      <div class="sub">Referral confirmed. Ready to play.</div>
     </div>
-    <div class="phone" id="dPhone" style="left:1190px;top:100px">
+    <div class="phone" id="dPhone" style="left:1190px;top:60px">
       <div class="screen">
-        <div class="notch"></div>
-        <div class="sbar"><span>9:42</span><span>●●● 5G</span></div>
-        <div class="apphead"><div class="logo-dot">🔥</div>Play to Win</div>
-        <div id="dToast" class="abs" style="top:20px;left:18px;right:18px;border-radius:24px;background:#2a2340;padding:18px 20px;display:flex;gap:14px;align-items:center;z-index:6;box-shadow:0 10px 30px rgba(0,0,0,.5)">
-          <div style="font-size:36px">🎉</div>
-          <div><div style="font-weight:800;font-size:20px">@amani joined with your handle</div><div class="label" style="font-size:17px">Referral confirmed · +1 chance</div></div>
+        <div class="sbar"><span>7:32</span><span>5G ▮▮▮ 72%</span></div>
+        <div class="ptw-head"><span>←</span><span>Play to Win</span><span class="r"><span>?</span><span>⟳</span></span></div>
+        <div class="tabs"><div class="on">Play</div><div>Leaderboard</div></div>
+        <div id="dToast" class="abs" style="top:10px;left:14px;right:14px;border-radius:22px;background:#1f2430;border:1.5px solid #3a404c;padding:16px 18px;display:flex;gap:14px;align-items:center;z-index:6;box-shadow:0 10px 30px rgba(0,0,0,.6)">
+          <div style="font-size:34px">🎁</div>
+          <div><div style="font-weight:700;font-size:19px">amani entered your handle</div><div style="color:var(--mute);font-size:16px">Referral confirmed · +1 chance</div></div>
         </div>
-        <div class="abs" style="top:150px;left:28px;right:28px;text-align:center">
-          <div class="label" style="font-size:22px">@kevo254 · Your chances</div>
-          <div style="position:relative;height:250px;margin-top:10px">
-            <div id="dRing" class="abs" style="left:50%;top:0;width:250px;height:250px;margin-left:-125px;border-radius:50%;border:10px solid var(--pink);box-shadow:0 0 50px rgba(255,61,139,.5)"></div>
-            <div id="dNumOld" class="abs" style="left:0;right:0;top:40px;font-size:150px;font-weight:900;line-height:1">2</div>
-            <div id="dNumNew" class="abs" style="left:0;right:0;top:40px;font-size:150px;font-weight:900;line-height:1;opacity:0">3</div>
-            <div id="dPlus" class="abs" style="right:40px;top:10px;font-size:46px;font-weight:900;color:var(--green);opacity:0">+1</div>
+        <div class="card" style="top:192px;display:flex;gap:16px;align-items:center">
+          <div class="game-ic">🍬</div>
+          <div><div style="font-size:22px;font-weight:700">Candy Shooter</div><div style="color:var(--mute);font-size:17px">Get the highest score you can to win!</div></div>
+        </div>
+        <div class="card" id="dChCard" style="top:320px">
+          <div style="font-size:17px;color:var(--mute);height:24px;position:relative;overflow:hidden">
+            <span id="dOld" class="abs" style="left:0;top:0"><b style="color:#fff">2</b> chances left this week · best today: 1140</span>
+            <span id="dNew" class="abs" style="left:0;top:0"><b style="color:var(--green)">3</b> chances left this week · best today: 1140</span>
           </div>
-          <div id="dConf" style="display:inline-flex;margin-top:26px;gap:10px;align-items:center;padding:12px 24px;border-radius:40px;background:rgba(43,214,123,.15);color:var(--green);font-weight:800;font-size:22px;opacity:0">✔ Referral confirmed</div>
-          <div class="label" style="margin-top:28px">Invited friends: <b id="dFriends" style="color:#fff">1</b></div>
+          <div style="display:flex;gap:14px;margin-top:14px"><div class="pill p-amber" id="dPlay" style="flex:1"><span style="display:inline-block;border-left:14px solid #111;border-top:9px solid transparent;border-bottom:9px solid transparent"></span> Play</div><div class="pill p-line" style="flex:1">+ Invite</div></div>
         </div>
-        <div class="abs btn" id="dBtn" style="left:28px;right:28px;bottom:70px">▶ Start game</div>
-        <div class="tap" id="dTap" style="left:180px;bottom:70px"></div>
+        <div id="dPlus" class="abs" style="left:40px;top:300px;font-size:44px;font-weight:900;color:var(--green);opacity:0">+1</div>
+        <div id="dBig" class="abs" style="left:0;right:0;top:500px;text-align:center">
+          <div style="font-size:18px;color:var(--mute)">kevo254 · chances this week</div>
+          <div style="position:relative;height:190px;margin-top:10px">
+            <div id="dRing" class="abs" style="left:50%;top:0;width:190px;height:190px;margin-left:-95px;border-radius:50%;border:8px solid var(--amber)"></div>
+            <div id="dN2" class="abs" style="left:0;right:0;top:34px;font-size:110px;font-weight:900;line-height:1">2</div>
+            <div id="dN3" class="abs" style="left:0;right:0;top:34px;font-size:110px;font-weight:900;line-height:1;opacity:0;color:var(--green)">3</div>
+          </div>
+          <div id="dConf" style="display:inline-block;margin-top:18px;padding:10px 22px;border-radius:30px;background:rgba(43,214,123,.15);color:var(--green);font-weight:700;font-size:20px;opacity:0">✔ Referral confirmed</div>
+        </div>
+        <div class="tap" id="dTap" style="left:112px;top:416px"></div>
       </div>
     </div>
   </div>
 
-  <!-- E: game + leaderboard -->
+  <!-- E: Candy Shooter + leaderboard -->
   <div class="scene" id="sE">
-    <div class="phone" id="ePhone" style="left:240px;top:100px">
-      <div class="screen" style="background:radial-gradient(circle at 50% 30%,#2b1d4a,#0d0a18)">
-        <div class="notch"></div>
-        <div class="sbar"><span>9:42</span><span>●●● 5G</span></div>
-        <div class="abs" style="top:70px;left:28px;right:28px;display:flex;justify-content:space-between;font-weight:800;font-size:24px">
-          <span>Smoke Rings</span><span>Score <span id="eScore" class="grad">0</span></span>
+    <div class="phone" id="ePhone" style="left:240px;top:60px">
+      <div class="screen" style="background:radial-gradient(circle at 50% 25%,#5a1a86,#1c0730 70%)">
+        <div class="sbar"><span>7:33</span><span>5G ▮▮▮ 72%</span></div>
+        <div class="abs" style="top:52px;left:22px;right:22px;display:flex;justify-content:space-between;font-weight:900;font-size:22px">
+          <span>🍬 Candy Shooter</span><span>Score <span id="eScore" class="amber">0</span></span>
         </div>
-        <div id="eField" class="abs" style="top:130px;left:0;right:0;bottom:0"></div>
+        <div id="eField" class="abs" style="top:100px;left:0;right:0;bottom:0"></div>
       </div>
     </div>
-    <div class="abs" id="eBoard" style="left:880px;top:130px;width:800px">
+    <div class="abs" id="eBoard" style="left:860px;top:110px;width:820px">
       <div class="step">STEP 3</div>
-      <div style="font-size:64px;font-weight:800;letter-spacing:-1px;margin-bottom:30px">Play &amp; <span class="grad">top the leaderboard</span></div>
-      <div id="eRows" style="position:relative;height:560px"></div>
+      <div style="font-size:66px;font-weight:900;letter-spacing:-1px;margin-bottom:26px">Play &amp; <span class="amber">top the leaderboard</span></div>
+      <div style="border-radius:26px;background:var(--card);padding:26px 30px">
+        <div style="font-size:28px;font-weight:700;margin-bottom:14px">Today's leaderboard</div>
+        <div id="eRows" style="position:relative;height:430px"></div>
+      </div>
     </div>
   </div>
 
-  <!-- F: bottle -> chest -> dollars + badges -->
+  <!-- F: Bottled sea -> bottle -> chest, badges -->
   <div class="scene" id="sF">
-    <div class="abs" id="fStep" style="left:0;right:0;top:70px;text-align:center"><span class="step">STEP 4</span><div style="font-size:60px;font-weight:800">Crack open the <span class="grad">treasure chest</span></div></div>
-    <div class="abs" id="fWorld" style="left:0;top:0;width:1920px;height:1080px">
-      <svg class="abs" id="fSea" style="left:0;top:760px" width="1920" height="320"><path id="fWave" fill="#1d3b8f" opacity=".8"/><path id="fWave2" fill="#2753c9" opacity=".7"/></svg>
-      <div class="abs" id="fGlow" style="width:900px;height:900px;border-radius:50%;background:radial-gradient(circle,rgba(255,197,61,.55),rgba(255,197,61,0) 65%);opacity:0"></div>
-      <div class="abs" id="fBottle" style="width:130px;height:300px">
-        <svg width="130" height="300" viewBox="0 0 130 300"><rect x="48" y="0" width="34" height="26" rx="6" fill="#9b6a3a"/><path d="M50 24h30v50c0 10 40 30 40 70v130c0 14-10 24-24 24H34c-14 0-24-10-24-24V144c0-40 40-60 40-70z" fill="rgba(120,220,200,.45)" stroke="rgba(200,255,240,.9)" stroke-width="4"/><rect x="36" y="150" width="58" height="70" rx="8" fill="#f3e1b4" transform="rotate(-8 65 185)"/><text x="65" y="195" text-anchor="middle" font-size="34" font-family="sans-serif" transform="rotate(-8 65 185)">🗝️</text></svg>
-      </div>
-      <div class="abs" id="fChest" style="width:360px;height:300px;opacity:0">
-        <div id="fBase" class="abs" style="left:0;top:120px;width:360px;height:180px;border-radius:0 0 26px 26px;background:linear-gradient(180deg,#8a4b1f,#5c2f10);border:8px solid #ffc53d">
-          <div class="abs" style="left:150px;top:-8px;width:60px;height:70px;border-radius:0 0 14px 14px;background:#ffc53d"></div>
-          <div class="abs" style="left:0;right:0;top:66px;height:14px;background:#ffc53d;opacity:.8"></div>
-        </div>
-        <div id="fLid" class="abs" style="left:0;top:20px;width:360px;height:110px;border-radius:70px 70px 8px 8px;background:linear-gradient(180deg,#a65a24,#7a3e15);border:8px solid #ffc53d;transform-origin:50% 100%"></div>
-      </div>
-      <div id="fDollars" class="abs" style="left:0;top:0;width:1920px;height:1080px"></div>
+    <div class="abs" style="inset:0;background:linear-gradient(180deg,#8fb6d6 0%,#5d8fb8 22%,#1d4f86 36%,#123a6b 70%,#0b2547 100%)"></div>
+    <svg class="abs" style="left:0;top:0" width="1920" height="1080"><path id="fW1" fill="#2c6aa6" opacity=".55"/><path id="fW2" fill="#1a4c85" opacity=".6"/><path id="fW3" fill="#0f355f" opacity=".7"/><g id="fFoam" fill="#fff" opacity=".35"></g></svg>
+    <div class="abs" id="fHint" style="left:0;right:0;top:40px;text-align:center;font-style:italic;font-size:34px;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.5)">Explore the seas, you never know. Tap on a bottle or chest.</div>
+    <div class="abs" id="fStep" style="left:0;right:0;top:110px;text-align:center"><span class="step" style="background:rgba(15,23,41,.7)">STEP 4</span><div style="font-size:62px;font-weight:900;text-shadow:0 4px 20px rgba(0,0,0,.5)">Crack open the <span class="amber">treasure chest</span></div></div>
+    <div id="fBottles"></div>
+    <div class="abs" id="fBurst" style="width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,180,.95),rgba(251,184,41,0) 65%);opacity:0"></div>
+    <div class="abs" id="fChest" style="width:360px;height:300px;opacity:0">
+      <svg class="abs" style="left:0;top:118px;overflow:visible" width="360" height="180"><use href="#chestBase"/></svg>
+      <svg class="abs" id="fLid" style="left:0;top:14px;overflow:visible;transform-origin:50% 100%" width="360" height="112"><use href="#chestLid"/></svg>
     </div>
-    <div class="abs" id="fBadges" style="left:1050px;top:300px;width:800px;height:500px">
-      <div class="badge" id="fb1" style="top:0">💸 <span>100% <span class="grad">free</span> to play</span></div>
-      <div class="badge" id="fb2" style="top:160px">🧠 <span>Skill, <span class="grad">not gambling</span></span></div>
-      <div class="badge" id="fb3" style="top:320px">🤝 <span>Grows the <span class="grad">community</span></span></div>
+    <div class="tap" id="fTap"></div>
+    <div class="abs" id="fBadges" style="left:1060px;top:320px;width:800px;height:500px">
+      <div class="badge" id="fb1" style="top:0">🆓 <span>100% <span class="amber">free</span> to play</span></div>
+      <div class="badge" id="fb2" style="top:160px">🧠 <span>Skill, <span class="amber">not gambling</span></span></div>
+      <div class="badge" id="fb3" style="top:320px">🤝 <span>Grows the <span class="amber">community</span></span></div>
     </div>
   </div>
 
-  <!-- G: end card -->
+  <!-- G: finale – chest opens, $ and KES fly, win + logo -->
   <div class="scene" id="sG">
-    <div class="abs" style="left:0;right:0;top:250px;text-align:center">
-      <div style="display:inline-flex;align-items:center;gap:24px">
-        <div class="logo-dot" style="width:110px;height:110px;border-radius:32px">
-          <svg width="66" height="66" viewBox="0 0 40 40" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round"><path d="M12 34c-4-6 4-9 0-15s3-10 3-14"/><path d="M21 34c-4-6 4-9 0-15s3-10 3-14"/><path d="M30 34c-4-6 4-9 0-15"/></svg>
-        </div>
-        <div style="font-size:120px;font-weight:900;letter-spacing:-3px">Smoke</div>
-      </div>
-      <div id="gTitle" class="grad" style="font-size:170px;font-weight:900;letter-spacing:-5px;line-height:1.1;margin-top:10px">Play to Win</div>
-      <div id="gSub" style="font-size:38px;color:var(--mute);font-weight:600;margin-top:24px">Free to play · Skill-based · Invite your friends</div>
+    <div class="abs" id="gRays" style="left:960px;top:560px;width:0;height:0">
+      <div class="abs" style="left:-900px;top:-900px;width:1800px;height:1800px;border-radius:50%;background:repeating-conic-gradient(rgba(251,184,41,.16) 0 10deg,rgba(251,184,41,0) 10deg 20deg);-webkit-mask:radial-gradient(circle,#000 20%,transparent 65%);mask:radial-gradient(circle,#000 20%,transparent 65%)"></div>
+    </div>
+    <div class="abs" id="gGlow" style="left:510px;top:110px;width:900px;height:900px;border-radius:50%;background:radial-gradient(circle,rgba(255,210,90,.7),rgba(251,184,41,0) 62%);opacity:0"></div>
+    <div class="abs" id="gChest" style="left:780px;top:470px;width:360px;height:300px">
+      <div id="gPile" class="abs" style="left:30px;top:78px;width:300px;height:90px;border-radius:50% 50% 10px 10px;background:radial-gradient(ellipse at 50% 30%,#fff6c2,#ffd24a 40%,#c98a12);box-shadow:0 0 60px #ffd24a;opacity:0"></div>
+      <svg class="abs" style="left:0;top:118px;overflow:visible" width="360" height="180"><use href="#chestBase"/></svg>
+      <svg class="abs" id="gLid" style="left:0;top:14px;overflow:visible;transform-origin:50% 100%" width="360" height="112"><use href="#chestLid"/></svg>
+    </div>
+    <div id="gFly" class="abs" style="left:0;top:0;width:1920px;height:1080px"></div>
+    <div class="abs" id="gWin" style="left:0;right:0;top:120px;text-align:center">
+      <div style="font-size:40px;font-weight:700;color:#fff;letter-spacing:3px">YOU WON</div>
+      <div style="font-size:130px;font-weight:900;line-height:1.05" class="amber"><span id="gAmt">KES 1,000</span></div>
+      <div style="font-size:28px;color:var(--mute);margin-top:6px">Play to Win prize: #1 · sent to your M-Pesa</div>
+    </div>
+    <div class="abs" id="gEnd" style="left:0;right:0;top:250px;text-align:center;opacity:0">
+      <div class="wm" style="font-size:200px">sm<b>o</b>ke</div>
+      <div style="font-size:150px;font-weight:900;letter-spacing:-4px;line-height:1.1;margin-top:10px" class="amber">Play to Win</div>
+      <div style="font-size:36px;color:#d5d9e0;font-weight:500;margin-top:20px">Free to play · Skill, not gambling · Invite your friends</div>
     </div>
   </div>
 
@@ -203,11 +239,10 @@ const eio = x => x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
 const back = x => { const c = 1.9; return 1 + (c + 1) * Math.pow(x - 1, 3) + c * Math.pow(x - 1, 2); };
 const lerp = (a, b, x) => a + (b - a) * x;
 function rnd(seed) { let s = seed; return () => (s = (s * 16807) % 2147483647) / 2147483647; }
-// scene visibility with fade in/out; returns local "enter" progress
 function scene(el, t, a, b, f = .35) {
   const o = Math.min(P(t, a, a + f), 1 - P(t, b - f, b));
   el.style.opacity = o; el.style.display = o > 0 ? 'block' : 'none';
-  return o;
+  return o > 0;
 }
 function pop(el, t, a, d = .45, from = 30) {
   const x = P(t, a, a + d);
@@ -219,167 +254,207 @@ function tap(el, t, at) {
   el.style.opacity = x > 0 && x < 1 ? (x < .3 ? x / .3 : 1 - (x - .3) / .7) : 0;
   el.style.transform = `scale(${lerp(1.4, .8, eo(x))})`;
 }
+function waves(ids, t, base) {
+  ids.forEach((id, k) => {
+    const pts = [];
+    for (let X = 0; X <= 1920; X += 40) pts.push(`${X},${base[k] + Math.sin(X / (140 + k * 30) + t * (1.6 + k * .5) * (k % 2 ? -1 : 1)) * (14 + k * 4)}`);
+    $(id).setAttribute('d', `M0,1080 L${pts.join(' L')} L1920,1080 Z`);
+  });
+}
 
 // ---- build dynamic DOM ----
-const title = 'PLAY TO WIN';
-$('bTitle').innerHTML = [...title].map(c => `<span class="grad" style="display:inline-block;${c === ' ' ? 'width:60px' : ''}">${c === ' ' ? '' : c}</span>`).join('');
+$('bTitle').innerHTML = [...'PLAY TO WIN'].map((c, i) => `<span style="display:inline-block;${i > 7 ? 'color:var(--amber);' : ''}${c === ' ' ? 'width:60px' : ''}">${c === ' ' ? '' : c}</span>`).join('');
+
 const PLAYERS = [
-  { n: '@shiku.w', s: 4820, c: '#4da3ff' }, { n: '@brayo_ke', s: 4510, c: '#2bd67b' },
-  { n: '@nyambura', s: 4175, c: '#ff3d8b' }, { n: '@otieno.jr', s: 3900, c: '#ffc53d' },
-  { n: '@wairimu', s: 3640, c: '#7b5cff' }, { n: '@kevo254', s: 3100, c: '#ff5a36', me: true },
+  { n: 'master', s: 1140 }, { n: 'shiku.w', s: 1085 }, { n: 'brayo_ke', s: 990 },
+  { n: 'nyambura', s: 910 }, { n: 'otieno.jr', s: 860 }, { n: 'kevo254', s: 0, me: true },
 ];
-$('eRows').innerHTML = PLAYERS.map((p, i) => `<div class="row" id="r${i}" ${p.me ? 'style="background:linear-gradient(90deg,rgba(255,90,54,.35),rgba(123,92,255,.35));border:2px solid #ff5a36"' : ''}><span class="rk" id="rk${i}"></span><span class="av" style="background:${p.c}"></span><span>${p.n}${p.me ? ' <span style="color:var(--gold)">(you)</span>' : ''}</span><span class="sc" id="sc${i}"></span><span id="cr${i}" style="font-size:34px;width:40px"></span></div>`).join('');
-// game targets
-const R = rnd(7), TARGETS = [];
-for (let i = 0; i < 12; i++) TARGETS.push({ x: 60 + R() * 260, y: 60 + R() * 520, at: 14.0 + i * .17, c: ['#ff5a36', '#ff3d8b', '#7b5cff', '#ffc53d'][i % 4] });
-$('eField').innerHTML = TARGETS.map((g, i) => `<div id="g${i}" class="abs" style="left:${g.x}px;top:${g.y}px;width:84px;height:84px;border-radius:50%;border:12px solid ${g.c};box-shadow:0 0 30px ${g.c}"></div><div id="gp${i}" class="abs" style="left:${g.x + 10}px;top:${g.y - 10}px;font-weight:900;font-size:28px;color:var(--gold)">+150</div>`).join('') + '<div class="tap" id="eTap"></div>';
-// dollars
-const DR = rnd(42), DOL = [];
-for (let i = 0; i < 70; i++) DOL.push({ t0: 17.45 + i * .075, vx: (DR() - .5) * 900, vy: -(700 + DR() * 650), rot: (DR() - .5) * 720, s: 40 + DR() * 60 });
-$('fDollars').innerHTML = DOL.map((d, i) => `<div class="dollar" id="d${i}" style="font-size:${d.s}px">$</div>`).join('');
+const PRIZE = ['KES 1,000', 'KES 500', 'KES 300', 'KES 200', 'KES 100', ''];
+$('eRows').innerHTML = PLAYERS.map((p, i) => `<div class="lrow" id="r${i}" ${p.me ? 'style="background:rgba(251,184,41,.14);outline:2px solid var(--amber)"' : ''}><span class="rk" id="rk${i}"></span><span style="${p.me ? 'color:var(--amber);font-weight:700' : ''}">${p.n}${p.me ? ' (you)' : ''}</span><span class="sc" id="sc${i}"></span><span class="pz" id="pz${i}"></span></div>`).join('');
+
+// candy shooter: grid of candies, shooter at bottom
+const CANDY = ['#ff4d6d', '#ffd23f', '#3ddc97', '#4cc9f0', '#c77dff'];
+const CR = rnd(11), GRID = [];
+for (let r = 0; r < 6; r++) for (let c = 0; c < 7; c++) GRID.push({ x: 26 + c * 52 + (r % 2) * 26, y: 20 + r * 46, col: CANDY[Math.floor(CR() * 5)] });
+const SHOTS = [];
+for (let i = 0; i < 9; i++) { const target = GRID[(i * 11 + 5) % GRID.length]; SHOTS.push({ at: 14.1 + i * .22, g: (i * 11 + 5) % GRID.length, col: target.col }); }
+$('eField').innerHTML = GRID.map((g, i) => `<div id="gc${i}" class="abs" style="left:${g.x}px;top:${g.y}px;width:46px;height:46px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,${g.col} 35%,${g.col})"></div>`).join('')
+  + SHOTS.map((s, i) => `<div id="sh${i}" class="abs" style="width:46px;height:46px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,${s.col} 35%);opacity:0"></div><div id="sp${i}" class="abs amber" style="font-weight:900;font-size:26px;opacity:0">+140</div>`).join('')
+  + `<div class="abs" style="left:163px;top:660px;width:80px;height:80px;border-radius:50%;background:radial-gradient(circle,#ffe6a8,#fbb829);box-shadow:0 0 30px #fbb829"></div><div id="eAim" class="abs" style="left:199px;top:580px;width:8px;height:90px;border-radius:4px;background:linear-gradient(#fff0,#fff);transform-origin:50% 100%"></div>`;
+
+// bottles on the sea
+const BOT = [{ x: 180, y: 640, r: -30 }, { x: 470, y: 820, r: 25 }, { x: 1500, y: 600, r: 35 }, { x: 1700, y: 830, r: -20 }, { x: 900, y: 610, r: -38, hero: true }, { x: 1250, y: 860, r: 60 }];
+$('fBottles').innerHTML = BOT.map((b, i) => `<svg id="bt${i}" class="abs" width="104" height="240" style="overflow:visible"><use href="#bottle"/></svg>`).join('');
+
+// finale flyers: $ glyphs, KES notes, coins
+const FR = rnd(99), FLY = [];
+for (let i = 0; i < 80; i++) {
+  const k = i % 3;
+  FLY.push({ k, t0: 23.35 + i * .02, vx: (FR() - .5) * 1500, vy: -(900 + FR() * 700), rot: (FR() - .5) * 600, s: .7 + FR() * .7 });
+}
+$('gFly').innerHTML = FLY.map((f, i) => f.k === 0 ? `<div class="fly dol" id="f${i}" style="font-size:${Math.round(70 * f.s)}px">$</div>`
+  : f.k === 1 ? `<div class="fly kes" id="f${i}">KES 1,000</div>` : `<div class="fly coin" id="f${i}">$</div>`).join('');
 
 // ---- render ----
 function render(t) {
-  // background blobs drift like smoke
-  $('b1').style.transform = `translate(${-150 + Math.sin(t * .4) * 200}px,${-200 + Math.cos(t * .3) * 120}px)`;
-  $('b2').style.transform = `translate(${1300 + Math.cos(t * .35) * 220}px,${400 + Math.sin(t * .45) * 160}px)`;
-  $('b3').style.transform = `translate(${700 + Math.sin(t * .25 + 2) * 300}px,${650 + Math.cos(t * .4) * 100}px)`;
+  $('s1').style.transform = `translate(${-200 + Math.sin(t * .35) * 220}px,${-150 + Math.cos(t * .3) * 120}px)`;
+  $('s2').style.transform = `translate(${1200 + Math.cos(t * .3) * 220}px,${420 + Math.sin(t * .4) * 160}px)`;
+  $('s3').style.transform = `translate(${650 + Math.sin(t * .22 + 2) * 300}px,${600 + Math.cos(t * .35) * 100}px)`;
 
-  // A: 0 - 4.7
+  // A 0–4.75
   if (scene($('sA'), t, -1, 4.75)) {
-    const x = P(t, .15, .9);
-    $('aLogo').style.transform = `scale(${lerp(.7, 1, back(x))})`; $('aLogo').style.opacity = clamp(x * 2);
-    pop($('aT1'), t, 1.2, .5); pop($('aT2'), t, 2.7, .5);
+    const x = P(t, .1, .9);
+    $('aLogo').style.transform = `scale(${lerp(.75, 1, back(x))})`; $('aLogo').style.opacity = clamp(x * 2);
+    $('aLogo').style.filter = `blur(${(1 - eo(x)) * 20}px)`;
     $('aT1').style.display = $('aT2').style.display = 'inline-block';
-    [['bb1', .8], ['bb2', 1.5], ['bb3', 2.3], ['bb4', 3.0]].forEach(([id, a], i) => {
+    pop($('aT1'), t, 1.2, .5); pop($('aT2'), t, 2.6, .5);
+    [['bb1', .7], ['bb2', 1.4], ['bb3', 2.2], ['bb4', 2.9]].forEach(([id, a], i) => {
       pop($(id), t, a, .5); $(id).style.transform += ` translateY(${Math.sin(t * 2 + i) * 8}px)`;
     });
   }
-  // B: 4.7 - 6.7
+  // B 4.6–6.75
   if (scene($('sB'), t, 4.6, 6.75, .3)) {
-    pop($('bKick'), t, 4.75, .4);
+    pop($('bKick'), t, 4.7, .4);
     [...$('bTitle').children].forEach((s, i) => {
-      const x = P(t, 4.85 + i * .05, 5.2 + i * .05);
+      const x = P(t, 4.8 + i * .05, 5.15 + i * .05);
       s.style.opacity = clamp(x * 3); s.style.transform = `translateY(${(1 - eo(x)) * -120}px) scale(${lerp(2, 1, eo(x))})`;
     });
-    pop($('bTro'), t, 5.55, .5, 80);
+    pop($('bTro'), t, 5.5, .5, 80);
     $('bTro').style.transform += ` rotate(${Math.sin(t * 6) * 6}deg)`;
   }
-  // C: 6.7 - 10.45  (handle entry)
+  // C 6.65–10.5
   if (scene($('sC'), t, 6.65, 10.5)) {
     const x = P(t, 6.65, 7.3);
     $('cPhone').style.transform = `translateY(${(1 - eo(x)) * 200}px) rotate(${(1 - eo(x)) * -6}deg)`;
     const cx = P(t, 6.9, 7.5); $('cCall').style.opacity = cx; $('cCall').style.transform = `translateX(${(1 - eo(cx)) * 60}px)`;
-    const handle = 'kevo254', at = t > 7.35 ? '@' : '';
-    const n = Math.floor(clamp((t - 7.5) / .14, 0, handle.length));
-    $('cAt').textContent = at; $('cAt').style.color = '#fff'; $('cTyped').textContent = handle.slice(0, n);
-    $('cCaret').style.opacity = t < 9.35 && (Math.floor(t * 3) % 2 === 0 || (t > 7.35 && t < 8.6)) ? 1 : 0;
-    $('cInput').style.borderColor = t > 7.35 && t < 9.4 ? '#ff3d8b' : '#3a3152';
-    pop($('cCard'), t, 8.65, .4, 20);
+    const h = 'kevo254', n = Math.floor(clamp((t - 7.5) / .15, 0, h.length));
+    $('cTyped').textContent = h.slice(0, n); $('cPh').style.display = n ? 'none' : 'inline';
+    $('cCaret').style.opacity = t > 7.3 && t < 9.3 && (t < 8.6 || Math.floor(t * 3) % 2 === 0) ? 1 : 0;
+    $('cInput').style.borderColor = t > 7.3 && t < 9.4 ? 'var(--amber)' : '#3f444d';
+    const ready = n === h.length, done = t > 9.45;
+    $('cBtn').style.color = done ? '#111' : ready ? 'var(--amber)' : '#8a8f98';
+    $('cBtn').style.background = done ? 'var(--green)' : 'transparent';
+    $('cBtn').textContent = done ? '✔ Thanks! kevo254 gets a chance' : 'Confirm';
+    $('cBtn').style.transform = `scale(${t > 9.3 && t < 9.5 ? .94 : 1})`;
     tap($('cTap'), t, 9.4);
-    const done = t > 9.45;
-    $('cBtn').textContent = done ? '✔ Referral added' : 'Confirm referral';
-    $('cBtn').style.background = done ? 'var(--green)' : '';
-    $('cBtn').style.transform = `scale(${t > 9.3 && t < 9.5 ? .95 : 1})`;
   }
-  // D: 10.45 - 13.9 (referrer counter)
+  // D 10.4–13.95
   if (scene($('sD'), t, 10.4, 13.95)) {
     const x = P(t, 10.4, 11.0);
     $('dPhone').style.transform = `translateY(${(1 - eo(x)) * 200}px) rotate(${(1 - eo(x)) * 6}deg)`;
     const cx = P(t, 10.6, 11.2); $('dCall').style.opacity = cx; $('dCall').style.transform = `translateX(${(1 - eo(cx)) * -60}px)`;
-    const ty = P(t, 10.75, 11.1), tout = P(t, 12.9, 13.2);
-    $('dToast').style.transform = `translateY(${(1 - eo(ty)) * -160 - eo(tout) * 160}px)`;
+    const ty = P(t, 10.75, 11.1), tout = P(t, 12.8, 13.1);
+    $('dToast').style.transform = `translateY(${(1 - eo(ty)) * -170 - eo(tout) * 170}px)`;
     const sw = P(t, 11.35, 11.6);
-    $('dNumOld').style.opacity = 1 - sw; $('dNumOld').style.transform = `translateY(${-sw * 60}px)`;
-    $('dNumNew').style.opacity = sw; $('dNumNew').style.transform = `translateY(${(1 - sw) * 60}px) scale(${1 + Math.sin(P(t, 11.5, 12) * Math.PI) * .25})`;
+    $('dOld').style.transform = `translateY(${-sw * 26}px)`; $('dNew').style.transform = `translateY(${(1 - sw) * 26}px)`;
+    $('dN2').style.opacity = 1 - sw; $('dN2').style.transform = `translateY(${-sw * 50}px)`;
+    $('dN3').style.opacity = sw; $('dN3').style.transform = `translateY(${(1 - sw) * 50}px) scale(${1 + Math.sin(P(t, 11.5, 12) * Math.PI) * .25})`;
     const pl = P(t, 11.4, 12.4); $('dPlus').style.opacity = pl > 0 && pl < 1 ? 1 - pl : 0; $('dPlus').style.transform = `translateY(${-pl * 60}px)`;
     $('dRing').style.transform = `scale(${1 + Math.sin(P(t, 11.4, 11.9) * Math.PI) * .12})`;
-    $('dRing').style.borderColor = t > 11.4 ? 'var(--green)' : 'var(--pink)';
-    $('dRing').style.boxShadow = t > 11.4 ? '0 0 60px rgba(43,214,123,.6)' : '0 0 50px rgba(255,61,139,.5)';
+    $('dRing').style.borderColor = t > 11.4 ? 'var(--green)' : 'var(--amber)';
+    $('dRing').style.boxShadow = t > 11.4 ? '0 0 50px rgba(43,214,123,.55)' : '0 0 40px rgba(251,184,41,.4)';
+    $('dChCard').style.boxShadow = t > 11.35 && t < 12.2 ? '0 0 0 3px var(--green)' : 'none';
     pop($('dConf'), t, 11.9, .4, 20);
-    $('dFriends').textContent = t > 11.4 ? '1' : '0';
-    $('dBtn').style.transform = `scale(${t > 12.3 ? 1 + Math.sin((t - 12.3) * 9) * .03 : 1})`;
+    $('dPlay').style.transform = `scale(${t > 12.3 ? 1 + Math.sin((t - 12.3) * 9) * .04 : 1})`;
     tap($('dTap'), t, 13.35);
   }
-  // E: 13.9 - 16.3 (game + leaderboard)
+  // E 13.85–16.3
   if (scene($('sE'), t, 13.85, 16.3)) {
     const x = P(t, 13.85, 14.3);
     $('eBoard').style.opacity = x; $('eBoard').style.transform = `translateX(${(1 - eo(x)) * 60}px)`;
-    let score = 0, tapEl = $('eTap');
-    TARGETS.forEach((g, i) => {
-      const a = P(t, g.at - .35, g.at - .05), popx = P(t, g.at, g.at + .25);
-      const el = $('g' + i);
-      el.style.opacity = t < g.at ? a : 1 - popx;
-      el.style.transform = `scale(${t < g.at ? back(a) * .9 : 1 + popx * .6})`;
-      const gp = P(t, g.at, g.at + .6); $('gp' + i).style.opacity = gp > 0 && gp < 1 ? 1 - gp : 0; $('gp' + i).style.transform = `translateY(${-gp * 50}px)`;
-      if (t >= g.at) score += 150;
-      if (Math.abs(t - g.at) < .2) { tapEl.style.left = (g.x + 7) + 'px'; tapEl.style.top = (g.y + 137) + 'px'; tap(tapEl, t, g.at); }
+    let score = 0;
+    const popped = new Set();
+    SHOTS.forEach((s, i) => {
+      const g = GRID[s.g], fx = P(t, s.at - .18, s.at), el = $('sh' + i);
+      el.style.opacity = fx > 0 && fx < 1 ? 1 : 0;
+      el.style.left = lerp(180, g.x, fx) + 'px'; el.style.top = lerp(676, g.y, fx) + 'px';
+      if (t >= s.at) { score += 140; popped.add(s.g); }
+      const sp = P(t, s.at, s.at + .6); $('sp' + i).style.opacity = sp > 0 && sp < 1 ? 1 - sp : 0;
+      $('sp' + i).style.left = g.x + 'px'; $('sp' + i).style.top = (g.y - sp * 40) + 'px';
+      if (Math.abs(t - s.at + .2) < .25) $('eAim').style.transform = `rotate(${Math.atan2(g.x + 23 - 203, 660 - g.y) * 180 / Math.PI}deg)`;
     });
-    $('eScore').textContent = (3100 + score).toLocaleString('en-US');
-    // leaderboard: my score climbs from 3100 to 4900
-    const me = 3100 + score;
+    GRID.forEach((g, i) => {
+      const s = SHOTS.find(z => z.g === i), el = $('gc' + i);
+      const k = s ? P(t, s.at, s.at + .2) : 0;
+      el.style.opacity = 1 - k; el.style.transform = `scale(${1 + k * .8})`;
+    });
+    $('eScore').textContent = score.toLocaleString('en-US');
+    const me = 60 + score;
     const list = PLAYERS.map((p, i) => ({ i, s: p.me ? me : p.s })).sort((a, b) => b.s - a.s);
     list.forEach((o, rank) => {
-      const row = $('r' + o.i);
-      const prev = parseFloat(row.dataset.y ?? rank * 92);
-      const y = lerp(prev, rank * 92, .35); row.dataset.y = y;
-      row.style.top = y + 'px';
+      const row = $('r' + o.i), prev = parseFloat(row.dataset.y ?? rank * 72);
+      const y = lerp(prev, rank * 72, .3); row.dataset.y = y; row.style.top = y + 'px';
       $('rk' + o.i).textContent = '#' + (rank + 1);
       $('sc' + o.i).textContent = o.s.toLocaleString('en-US');
-      $('cr' + o.i).textContent = rank === 0 ? '👑' : '';
+      $('pz' + o.i).textContent = PRIZE[rank];
       row.style.zIndex = PLAYERS[o.i].me ? 5 : 1;
     });
   }
-  // F: 16.1 - 23.0 (bottle, chest, dollars, badges)
-  if (scene($('sF'), t, 16.1, 23.05)) {
-    const sx = P(t, 16.1, 16.6); $('fStep').style.opacity = sx * (1 - P(t, 17.6, 18.0));
-    const shift = eio(P(t, 17.6, 18.3));           // chest slides left for badges
-    const cx = lerp(960, 560, shift), cy = 600;
-    const w1 = [], w2 = [];
-    for (let X = 0; X <= 1920; X += 40) { w1.push(`${X},${60 + Math.sin(X / 160 + t * 2) * 18}`); w2.push(`${X},${100 + Math.sin(X / 120 - t * 2.4) * 16}`); }
-    $('fWave').setAttribute('d', `M0,320 L${w1.join(' L')} L1920,320 Z`);
-    $('fWave2').setAttribute('d', `M0,320 L${w2.join(' L')} L1920,320 Z`);
-    $('fSea').style.opacity = 1 - P(t, 17.6, 18.2) * .6;
-    // bottle floats in, shakes, bursts
-    const bIn = P(t, 16.1, 16.7), shake = P(t, 16.7, 17.05);
-    $('fBottle').style.left = (lerp(-200, cx - 65, eo(bIn)) + Math.sin(t * 50) * 10 * shake) + 'px';
-    $('fBottle').style.top = (cy - 160 + Math.sin(t * 3) * 14) + 'px';
-    $('fBottle').style.transform = `rotate(${Math.sin(t * 2.5) * 10 + Math.sin(t * 60) * 8 * shake}deg)`;
-    $('fBottle').style.opacity = t < 17.05 ? 1 : 0;
-    $('flash').style.opacity = t > 17.0 && t < 17.4 ? 1 - P(t, 17.05, 17.4) : 0;
-    const ch = P(t, 17.05, 17.4);
-    $('fChest').style.opacity = t > 17.05 ? 1 : 0;
-    $('fChest').style.left = (cx - 180) + 'px'; $('fChest').style.top = (cy - 180 + Math.sin(t * 3) * 6) + 'px';
-    $('fChest').style.transform = `scale(${lerp(.3, 1, back(ch))})`;
-    $('fLid').style.transform = `perspective(700px) rotateX(${-eo(P(t, 17.3, 17.65)) * 105}deg)`;
-    $('fGlow').style.left = (cx - 450) + 'px'; $('fGlow').style.top = (cy - 500) + 'px';
-    $('fGlow').style.opacity = P(t, 17.35, 17.7) * (.85 + Math.sin(t * 5) * .15);
-    $('fGlow').style.transform = `scale(${1 + Math.sin(t * 3) * .05}) rotate(${t * 20}deg)`;
-    const g = 1500;
-    DOL.forEach((d, i) => {
-      const el = $('d' + i), lt = t - d.t0;
-      if (lt < 0 || lt > 1.8) { el.style.opacity = 0; return; }
-      el.style.opacity = 1 - P(lt, 1.3, 1.8);
-      el.style.left = (cx - 20 + d.vx * lt) + 'px';
-      el.style.top = (cy - 140 + d.vy * lt + g * lt * lt / 2) + 'px';
-      el.style.transform = `rotate(${d.rot * lt}deg) scale(${lerp(.3, 1, P(lt, 0, .25))})`;
+  // F 16.1–23.2 : bottled sea, bottle -> chest, badges
+  if (scene($('sF'), t, 16.1, 23.2)) {
+    waves(['fW1', 'fW2', 'fW3'], t, [520, 700, 900]);
+    $('fHint').style.opacity = P(t, 16.2, 16.5) * (1 - P(t, 17.4, 17.7));
+    $('fStep').style.opacity = P(t, 16.3, 16.7) * (1 - P(t, 17.6, 17.9));
+    const heroX = 900, heroY = 610;
+    BOT.forEach((b, i) => {
+      const el = $('bt' + i), bob = Math.sin(t * 2.2 + i) * 12;
+      let sc = 1, op = 1, sh = 0;
+      if (b.hero) { sh = P(t, 16.75, 17.05); op = t < 17.05 ? 1 : 0; sc = 1 + sh * .25; }
+      else op = 1 - P(t, 17.6, 18.0) * .5;
+      el.style.left = (b.x + Math.sin(t * 40) * 8 * sh) + 'px'; el.style.top = (b.y + bob) + 'px';
+      el.style.opacity = op; el.style.transform = `rotate(${b.r + Math.sin(t * 1.8 + i) * 8 + Math.sin(t * 55) * 10 * sh}deg) scale(${sc})`;
     });
+    $('fTap').style.left = (heroX + 52) + 'px'; $('fTap').style.top = (heroY + 130) + 'px'; tap($('fTap'), t, 16.7);
+    const bu = P(t, 17.0, 17.6); $('fBurst').style.opacity = bu > 0 && bu < 1 ? 1 - bu : 0;
+    $('fBurst').style.left = (heroX - 200) + 'px'; $('fBurst').style.top = (heroY - 130) + 'px'; $('fBurst').style.transform = `scale(${.4 + bu * 1.4})`;
+    $('flash').style.opacity = t > 17.0 && t < 17.35 ? .8 * (1 - P(t, 17.0, 17.35)) : 0;
+    // chest emerges from bottle, drifts left for badges, lid rattles (payoff in finale)
+    const ch = P(t, 17.05, 17.45), sl = eio(P(t, 17.6, 18.3));
+    const cx = lerp(heroX + 52, 560, sl), cy = lerp(heroY + 120, 600, sl);
+    const chest = $('fChest');
+    chest.style.opacity = t > 17.05 ? 1 : 0;
+    chest.style.left = (cx - 180) + 'px'; chest.style.top = (cy - 150 + Math.sin(t * 2.4) * 8) + 'px';
+    chest.style.transform = `scale(${lerp(.15, 1, back(ch))}) rotate(${Math.sin(t * 2) * 2}deg)`;
+    const rattle = t > 18.5 ? Math.max(0, Math.sin(t * 2.2)) : 0;
+    $('fLid').style.transform = `perspective(700px) rotateX(${-rattle * 14 * Math.abs(Math.sin(t * 30))}deg)`;
     [['fb1', 17.75], ['fb2', 19.2], ['fb3', 20.75]].forEach(([id, a]) => {
       const x = P(t, a, a + .45); $(id).style.opacity = x;
       $(id).style.transform = `translateX(${(1 - eo(x)) * 120}px) scale(${lerp(.8, 1, back(x))})`;
     });
   }
-  // G: end card 23.0 - 26
-  if (scene($('sG'), t, 22.95, 99, .4)) {
-    pop($('gTitle'), t, 23.2, .55, 40); pop($('gSub'), t, 23.8, .5, 20);
+  // G 22.9–28.5 : finale
+  if (scene($('sG'), t, 22.9, 99, .4)) {
+    const zin = P(t, 22.9, 23.3);
+    $('gChest').style.transform = `translateY(${Math.sin(t * 2.4) * 6}px) scale(${lerp(.85, 1.15, eo(zin)) - P(t, 25.0, 25.6) * .15})`;
+    $('gChest').style.opacity = 1 - P(t, 24.9, 25.4);
+    $('gPile').style.opacity = P(t, 23.3, 23.5);
+    const shake = P(t, 22.95, 23.25) * (1 - P(t, 23.25, 23.3));
+    $('gChest').style.left = (780 + Math.sin(t * 70) * 10 * shake) + 'px';
+    $('gLid').style.transform = `perspective(700px) rotateX(${-eo(P(t, 23.25, 23.6)) * 110}deg)`;
+    $('gGlow').style.opacity = P(t, 23.25, 23.6) * (.85 + Math.sin(t * 5) * .15) * (1 - P(t, 24.9, 25.5) * .5);
+    $('gRays').style.opacity = P(t, 23.3, 23.8); $('gRays').style.transform = `rotate(${t * 18}deg)`;
+    const g = 1400;
+    FLY.forEach((f, i) => {
+      const el = $('f' + i), lt = t - f.t0;
+      if (lt < 0 || lt > 2.2) { el.style.opacity = 0; return; }
+      el.style.opacity = 1 - P(lt, 1.6, 2.2);
+      const X = 960 - 40 + f.vx * lt, Y = 520 + f.vy * lt + g * lt * lt / 2;
+      el.style.transform = `translate(${X}px,${Y}px) rotate(${f.rot * lt}deg) scale(${lerp(.3, f.s, P(lt, 0, .25))})`;
+    });
+    const w = P(t, 23.55, 24.0);
+    $('gWin').style.opacity = w * (1 - P(t, 24.95, 25.25));
+    $('gWin').style.transform = `scale(${lerp(.6, 1, back(w))})`;
+    const cnt = Math.round(eo(P(t, 23.6, 24.4)) * 1000);
+    $('gAmt').textContent = 'KES ' + cnt.toLocaleString('en-US');
+    const e = P(t, 25.15, 25.6);
+    $('gEnd').style.opacity = e; $('gEnd').style.transform = `scale(${lerp(.85, 1, back(e))})`;
   }
-  // captions
   const cap = TIMING.find(c => t >= c.start - .1 && t <= c.end + .3);
   $('caption').style.opacity = cap ? 1 : 0;
   if (cap) $('caption').textContent = cap.text;
 }
 window.render = render;
-if (!window.RENDERING) { const t0 = performance.now(); (function loop() { render(((performance.now() - t0) / 1000) % 26); requestAnimationFrame(loop); })(); }
+if (!window.RENDERING) { const t0 = performance.now(); (function loop() { render(((performance.now() - t0) / 1000) % 28.5); requestAnimationFrame(loop); })(); }
 </script>
 </body>
 </html>

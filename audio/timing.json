@@ -1,0 +1,44 @@
+[
+ {
+  "key": "intro",
+  "start": 0.4,
+  "end": 4.432,
+  "text": "Sasa! Smoke is the app for real conversations, and real connections."
+ },
+ {
+  "key": "feature",
+  "start": 4.782,
+  "end": 6.467,
+  "text": "And now? We've got Play to Win."
+ },
+ {
+  "key": "handle",
+  "start": 6.817,
+  "end": 10.209,
+  "text": "New on Smoke? Just drop the handle of the friend who invited you."
+ },
+ {
+  "key": "counter",
+  "start": 10.559,
+  "end": 13.589,
+  "text": "Boom. Their chance counter goes up. Referral confirmed."
+ },
+ {
+  "key": "game",
+  "start": 13.939,
+  "end": 17.224,
+  "text": "Then play, climb the leaderboard, and crack open the treasure chest."
+ },
+ {
+  "key": "free",
+  "start": 17.574,
+  "end": 22.801,
+  "text": "It's totally free to play. Pure skill, no gambling. And every invite grows the Smoke fam."
+ },
+ {
+  "key": "outro",
+  "start": 25.3,
+  "end": 26.601,
+  "text": "Smoke. Play to Win."
+ }
+]
