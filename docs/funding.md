@@ -9,7 +9,7 @@ _All figures in US dollars (USD). Last updated: October 2026._
 | Round size | **Up to $5,000,000 USD** (increased from the previous target) |
 | Instrument | Priced equity round (SAFE / convertible notes considered for early commitments) |
 | Minimum ticket | $25,000 USD |
-| Use of funds | Growth (Invite & Earn), product, the African MCP Registry, and team |
+| Use of funds | Growth (Invite & Earn), Smoke AI, the African MCP Registry, and team |
 
 We have raised the amount we are accepting this round to **$5M USD** to fund both continued consumer growth of Smoke and the launch of our new infrastructure product, the **African MCP Registry** (see below).
 
@@ -46,13 +46,30 @@ Core components:
 
 Smoke's existing user base, M-Pesa integration and East African distribution give us the launch surface for the registry's first commercial nodes.
 
+## Smoke AI: the consumer front door to the registry
+
+The registry is tied directly into Smoke through **Smoke AI**, an assistant built into the Smoke app. Smoke AI connects to the African MCP Registry, so every individual on Smoke can reach every business registered on it: ask a question, compare prices, book a service, order goods or pay, all inside the chat they already use every day.
+
+This makes the registry **consumer facing** from day one and gives us two revenue models on a single network:
+
+| Model | Who transacts | How Smoke earns |
+|---|---|---|
+| **B2B** | Business to business, server to server through the registry | Registry membership, verification and interconnect fees, plus transaction fees on cross-border trade |
+| **C2B** | Consumer to business, individuals reaching businesses through Smoke AI | Commission on purchases and bookings, promoted listings, premium Smoke AI features |
+
+Why this matters:
+
+- **Distribution** – businesses that join the registry get instant access to Smoke's consumer audience through Smoke AI, which makes joining the registry worth it before the B2B network reaches scale.
+- **Demand** – consumers on Smoke get a single assistant that can act across every registered African business, which drives engagement and retention in the app.
+- **Flywheel** – more users on Smoke (fed by Invite & Earn and Play to Win) attract more businesses to the registry, and more businesses make Smoke AI more useful to every user.
+
 ## Use of funds (up to $5M USD)
 
 | Allocation | Share | Purpose |
 |---|---|---|
 | Invite & Earn user acquisition | 35% | Fund referral payouts at ~$155 USD CAC and scale to new markets |
-| African MCP Registry | 35% | Engineering, security/authorisation, infrastructure, first partner integrations |
-| Product & engineering (Smoke app) | 15% | Play to Win, channels, messaging, reliability |
+| African MCP Registry | 30% | Engineering, security/authorisation, infrastructure, first partner integrations |
+| Smoke AI & Smoke app | 20% | Smoke AI assistant, registry integration, Play to Win, channels, messaging |
 | Team & operations | 10% | Key hires across engineering, partnerships and compliance |
 | Legal, compliance & reserve | 5% | Licensing, data protection, cross-border payments |
 
@@ -60,7 +77,8 @@ Smoke's existing user base, M-Pesa integration and East African distribution giv
 
 - Scale Invite & Earn beyond Kenya across East Africa.
 - Launch the African MCP Registry in beta with founding partner servers in trade, payments and logistics.
-- Open the registry to third-party African businesses with self-serve onboarding.
+- Ship Smoke AI to all users, with registered businesses reachable in-app (C2B live).
+- Open the registry to third-party African businesses with self-serve onboarding (B2B live).
 - Reach the user and partner scale needed for a Series A.
 
 ## Contact
