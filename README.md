@@ -24,3 +24,6 @@ Scenes live in `src/index.html` (`render(t)` draws the frame at time `t`); open 
 | `scripts/` | Voiceover, audio mix and render scripts |
 | `audio/` | Generated voiceover, timings and final mix |
 | `out/` | Rendered video (`play_to_win.mp4`) |
+
+## Funding
+Investor summary for the current round (in USD) lives in [`docs/funding.md`](docs/funding.md).
